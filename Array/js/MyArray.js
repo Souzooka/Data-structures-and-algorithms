@@ -3,21 +3,43 @@
 class MyArray {
 	constructor(length = 0) {
 		if (typeof length != "number") { throw new TypeError("MyArray's constructor was not given a number.")}
+		if (length < 0) { throw new Error("MyArray's constructor was given a negative number."); }
 		this.length = length;
 		Object.defineProperty(this, "length", {enumerable: false});
 	}
 }
 
 MyArray.from = function(iterable, transform = x => x, context = iterable) {
+
+	let isIterable = true,
+		arrayLike = false,
+		length = 0;
+
 	if (iterable == null || typeof iterable[Symbol.iterator] != "function") {
-		throw new TypeError("MyArray.from was not given an iterable object.");
+		isIterable = false;
+	}
+	if (Object.prototype.hasOwnProperty.call(iterable, "length")) {
+		arrayLike = true;
+		length = iterable.length;
+	}
+	if (!iterable && !arrayLike) {
+		throw new TypeError("MyArray.from was not given an iterable or arrayLike object. Name: iterable");
+	}
+	if (typeof transform != "function") { 
+		throw new TypeError("MyArray.from was not given a function. Name: transform"); 
 	}
 
-	const ret = new MyArray();
+	const ret = new MyArray(length);
 	let idx = 0;
 
-	for (let value of iterable) {
-		ret.push(transform.call(context, value, idx++, iterable));
+	if (isIterable) {
+		for (let value of iterable) {
+			ret[idx] = transform.call(context, value, idx++, iterable);
+		}
+	} else {
+		for (let i = 0; i < length; ++i) {
+			ret[idx] = transform.call(context, undefined, idx++, iterable);
+		}
 	}
 
 	return ret;
