@@ -45,3 +45,9 @@ MyArray.of = function() {
 }
 
 MyArray.prototype.push = require("./push");
+
+for (let prop in MyArray.prototype) {
+	Object.defineProperty(MyArray.prototype, prop, {enumerable: false});
+}
+
+module.exports = MyArray;
