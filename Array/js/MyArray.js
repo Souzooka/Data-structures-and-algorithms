@@ -57,10 +57,10 @@ MyArray.isMyArray = function(myArray) {
 }
 
 MyArray.of = function() {
-	const ret = new MyArray();
+	const ret = new MyArray(arguments.length);
 
 	for (let i = 0; i < arguments.length; ++i) {
-		ret.push(arguments[i]);
+		ret[i] = arguments[i];
 	}
 
 	return ret;
