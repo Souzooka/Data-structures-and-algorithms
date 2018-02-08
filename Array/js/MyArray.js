@@ -67,10 +67,11 @@ MyArray.of = function() {
 	return ret;
 }
 
+module.exports = MyArray;
+
 MyArray.prototype.push = require("./push");
+MyArray.prototype.slice = require("./slice");
 
 for (let prop in MyArray.prototype) {
 	Object.defineProperty(MyArray.prototype, prop, {enumerable: false});
 }
-
-module.exports = MyArray;

@@ -81,4 +81,25 @@ describe("MyArray", function() {
 			assert.strictEqual(arr.length, 1);
 		})
 	});
+
+	describe("MyArray.prototype.slice", function() {
+		it("should return a segment of the original array", function() {
+			let arr;
+			arr = MyArray.of(1, 2, 3, 4);
+			assert.deepEqual(arr.slice(0, 2), {"0": 1, "1": 2});
+			assert.deepEqual(arr.slice(-2), {"0": 3, "1": 4});
+			assert.deepEqual(arr.slice(-2, 1), {});
+			assert.deepEqual(arr.slice(-2, -1), {"0": 3});
+			assert.deepEqual(arr.slice(3, 0), {});
+			assert.deepEqual(arr.slice(), arr);
+			assert.deepEqual(arr.slice(0), arr);
+			assert.deepEqual(arr.slice(0, arr.length), arr);
+		});
+		it("should not mutate the original array", function() {
+			let arr;
+			arr = MyArray.of(1, 2, 3, 4);
+			arr.slice();
+			assert.deepEqual(arr, MyArray.of(1, 2, 3, 4));
+		});
+	});
 });
