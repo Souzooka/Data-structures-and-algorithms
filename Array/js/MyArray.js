@@ -10,6 +10,7 @@ class MyArray {
 }
 
 MyArray.from = function(iterable, transform = x => x, context = iterable) {
+	transform = transform.bind(context);
 
 	let isIterable = true,
 		arrayLike = false,
@@ -22,7 +23,7 @@ MyArray.from = function(iterable, transform = x => x, context = iterable) {
 		arrayLike = true;
 		length = iterable.length;
 	}
-	if (!iterable && !arrayLike) {
+	if (!isIterable && !arrayLike) {
 		throw new TypeError("MyArray.from was not given an iterable or arrayLike object. Name: iterable");
 	}
 	if (typeof transform != "function") { 
@@ -34,11 +35,11 @@ MyArray.from = function(iterable, transform = x => x, context = iterable) {
 
 	if (isIterable) {
 		for (let value of iterable) {
-			ret[idx] = transform.call(context, value, idx++, iterable);
+			ret[idx] = transform(value, idx++, iterable);
 		}
 	} else {
 		for (let i = 0; i < length; ++i) {
-			ret[idx] = transform.call(context, undefined, idx++, iterable);
+			ret[idx] = transform(undefined, idx++, iterable);
 		}
 	}
 
