@@ -82,6 +82,23 @@ describe("MyArray", function() {
 		})
 	});
 
+	describe("MyArray.prototype.push", function() {
+		it("should append a new element onto an existing array", function() {
+			let arr;
+			arr = new MyArray();
+			arr.push(2);
+			arr.push(5);
+			assert.deepEqual(arr, {"0": 2, "1": 5});
+			assert.strictEqual(arr.length, 2);
+		});
+		it("should return the new length of the array", function() {
+			let arr;
+			arr = new MyArray();
+			arr.push(2);
+			assert.strictEqual(arr.push(5), 2);
+		});
+	});
+
 	describe("MyArray.prototype.slice", function() {
 		it("should return a segment of the original array", function() {
 			let arr;
