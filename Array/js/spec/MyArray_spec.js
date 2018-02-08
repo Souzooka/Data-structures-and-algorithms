@@ -49,4 +49,36 @@ describe("MyArray", function() {
 			assert.throws(() => MyArray.from({length: 5}, null), Error);
 		});
 	});
+
+	describe("MyArray.isMyArray", function() {
+		it("should return true when given MyArray", function() {
+			assert(MyArray.isMyArray(new MyArray()));
+			assert(MyArray.isMyArray(new MyArray(5)));
+			assert(MyArray.isMyArray(MyArray.from({length: 5}, (_, i) => i)));
+		});
+		it("should return false when not given MyArray", function() {
+			assert(!MyArray.isMyArray([]));
+			assert(!MyArray.isMyArray(Object.assign({}, new MyArray())));
+			assert(!MyArray.isMyArray(null));
+			assert(!MyArray.isMyArray(9));
+			assert(!MyArray.isMyArray("nah"));
+			assert(!MyArray.isMyArray());
+			assert(!MyArray.isMyArray(undefined));
+		});
+	});
+
+	describe("MyArray.of", function() {
+		it("should return a new MyArray with given values", function() {
+			let arr;
+			assert.deepEqual(MyArray.of(), new MyArray());
+
+			arr = MyArray.of(undefined, undefined, undefined);
+			assert.deepEqual(arr, {"0": undefined, "1": undefined, "2": undefined});
+			assert.strictEqual(arr.length, 3);
+
+			arr = MyArray.of(7);
+			assert.deepEqual(arr, {"0": 7});
+			assert.strictEqual(arr.length, 1);
+		})
+	});
 });
