@@ -100,6 +100,43 @@ describe("MyArray", function() {
 		});
 	});
 
+	describe("MyArray.prototype.concat", function() {
+		it("should not mutate the array called upon", function() {
+			let arr = MyArray.of(1, 2, 3);
+			arr.concat(4);
+			assert.deepEqual(arr, {"0": 1, "1": 2, "2": 3});
+			assert.strictEqual(arr.length, 3);
+		})
+		it("should concatenate a value onto an array", function() {
+			let arr = MyArray.of(1, 2, 3);
+			arr = arr.concat(4);
+			assert.deepEqual(arr, {"0": 1, "1": 2, "2": 3, "3": 4});
+			assert.strictEqual(arr.length, 4);
+		});
+		it("should concatenate each of the values of an array passed onto an array", function() {
+			let arr = MyArray.of(1);
+			let arr2 = MyArray.of(2, 3, 4);
+			arr = arr.concat(arr2);
+			assert.deepEqual(arr, {"0": 1, "1": 2, "2": 3, "3": 4});
+			assert.strictEqual(arr.length, 4);
+		});
+		it("should accept multiple arguments", function() {
+			let arr = MyArray.of(1);
+			let arr2;
+			let arr3;
+			arr = arr.concat(2, 3, 4);
+			assert.deepEqual(arr, {"0": 1, "1": 2, "2": 3, "3": 4});
+			assert.strictEqual(arr.length, 4);
+
+			arr = MyArray.of(1);
+			arr2 = MyArray.of(2, 3, 4);
+			arr3 = MyArray.of(5, 6, 7);
+			arr = arr.concat(arr2, arr3, 8, 9);
+			assert.deepEqual(arr, {"0": 1, "1": 2, "2": 3, "3": 4, "4": 5, "5": 6, "6": 7, "7": 8, "8": 9});
+			assert.strictEqual(arr.length, 9);
+		});
+	});
+
 	describe("MyArray.prototype.fill", function() {
 		it("should fill a MyArray with a value", function() {
 			let arr;
@@ -132,6 +169,25 @@ describe("MyArray", function() {
 			assert.strictEqual(obj.apple, "red");
 			assert.strictEqual(arr[0].apple, "blue");
 			assert.equal(arr[0], arr[1]);
+		});
+	});
+
+	describe("MyArray.prototype.flatten", function() {
+		it("should not mutate the original array", function() {
+			let arr = MyArray.of(1, MyArray.of(2, 3), 4);
+			arr.flatten();
+			assert.deepEqual(arr, MyArray.of(1, MyArray.of(2, 3), 4));
+		});
+		it("should flatten an array by one level", function() {
+			let arr = MyArray.of(1, MyArray.of(2, 3), 4);
+			arr = arr.flatten();
+			assert.deepEqual(arr, MyArray.of(1, 2, 3, 4));
+			assert.strictEqual(arr.length, 4);
+
+			arr = MyArray.of(1, MyArray.of(2, MyArray.of(3)), 4);
+			arr = arr.flatten();
+			assert.deepEqual(arr, MyArray.of(1, 2, MyArray.of(3), 4));
+			assert.strictEqual(arr.length, 4);
 		});
 	});
 
