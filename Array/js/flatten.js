@@ -3,5 +3,5 @@
 const MyArray = require("./MyArray");
 
 module.exports = function flatten() {
-	return new MyArray().concat.call(new MyArray(), ...this);
+	return new MyArray().concat.apply(new MyArray(), this);
 }
