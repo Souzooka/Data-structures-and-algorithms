@@ -85,6 +85,30 @@ describe("MyArray", function() {
 		});
 	});
 
+	describe("MyArray.prototype.fill", function() {
+		it("should fill a MyArray with a value", function() {
+			let arr;
+			let modified;
+			arr = new MyArray(3);
+			modified = arr.fill(2);
+			assert.equal(modified, arr);
+			assert.deepEqual(modified, {"0": 2, "1": 2, "2": 2});
+		});
+		it("should fill a segment of an array if given a second and possibly third argument", function() {
+			let arr;
+			let modified;
+			arr = new MyArray(5);
+			modified = arr.fill(2, 2, 4)
+			assert.equal(modified, arr);
+			assert.deepEqual(modified, {"2": 2, "3": 2});
+
+			arr = new MyArray(5);
+			modified = arr.fill(2, -3, -1);
+			assert.equal(modified, arr);
+			assert.deepEqual(modified, {"2": 2, "3": 2});
+		});
+	});
+
 	describe("MyArray.of", function() {
 		it("should return a new MyArray with given values", function() {
 			let arr;
