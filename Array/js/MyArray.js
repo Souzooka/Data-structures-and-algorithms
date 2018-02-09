@@ -69,6 +69,8 @@ MyArray.of = function() {
 
 module.exports = MyArray;
 
+MyArray.prototype.indexOf = require("./indexOf");
+MyArray.prototype.includes = require("./includes");
 MyArray.prototype.pop = require("./pop");
 MyArray.prototype.push = require("./push");
 MyArray.prototype.slice = require("./slice");

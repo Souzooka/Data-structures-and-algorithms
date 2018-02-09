@@ -82,6 +82,61 @@ describe("MyArray", function() {
 		})
 	});
 
+	describe("MyArray.prototype.includes", function() {
+		it("should return a boolean indicating if the array contains a value", function() {
+			let arr;
+			arr = MyArray.of(true, false, !true, "hello", 2, 1);
+			assert(arr.includes(true));
+			assert(arr.includes(false));
+			assert(arr.includes("hello"));
+			assert(!arr.includes("hello world!"));
+			assert(!arr.includes(5));
+		});
+		it("should accept a second argument that indicates where to search array from", function() {
+			let arr;
+			arr = MyArray.of(true, false, !true, "hello", 2, 1);
+			assert(arr.includes(false, 2));
+			assert(arr.includes(false, -4));
+			assert(!arr.includes(false, 3));
+			assert(!arr.includes(false, -3));
+		});
+	});
+
+	describe("MyArray.prototype.indexOf", function() {
+		it("should locate the index of an element in an array", function() {
+			let arr;
+			arr = MyArray.of(10, 11, 12, 13, 14, 15, 16);
+			assert.strictEqual(arr.indexOf(11), 1);
+			assert.strictEqual(arr.indexOf(15), 5);
+		});
+		it("should use strict comparison", function() {
+			let arr;
+			arr = MyArray.of("2", 2);
+			assert.strictEqual(arr.indexOf(2), 1);
+		});
+		it("should return -1 if element is not found", function() {
+			let arr;
+			arr = MyArray.of(0, 1, 2, 3, 4, 5);
+			assert.strictEqual(arr.indexOf(6), -1);
+		});
+		it("should search from a specified point in array if given a second argument", function() {
+			let arr;
+			arr = MyArray.of(0, 1, 2, 3, 2, 5);
+			assert.strictEqual(arr.indexOf(2, 3), 4);
+		});
+		it("should calculate the index to start at from the end of array if given a negative second argument", function() {
+			let arr;
+			arr = MyArray.of(0, 1, 2, 3, 2, 5);
+			assert.strictEqual(arr.indexOf(2, -3), 4);
+		});
+		it("should search whole array if given fromIndex that is calculated to be less than 0", function() {
+			let arr;
+			arr = MyArray.of(0, 1, 2, 3, 4, 5);
+			assert.strictEqual(arr.indexOf(0, -54), 0);
+			assert.strictEqual(arr.indexOf(1, -54), 1);
+		});
+	});
+
 	describe("MyArray.prototype.pop", function() {
 		it("should return the last element of the array", function() {
 			let arr;
