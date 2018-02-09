@@ -79,6 +79,10 @@ describe("MyArray", function() {
 			}
 			assert.deepEqual(arr, {"0": 8, "1": "hello", "2": 10, "3": true});
 		});
+		it("should initialize holes in sparse MyArray", function() {
+			let arr = [...new MyArray(5)];
+			assert.deepEqual(arr, Array.of(undefined, undefined, undefined, undefined, undefined));
+		});
 	});
 
 	describe("MyArray.of", function() {
@@ -93,7 +97,7 @@ describe("MyArray", function() {
 			arr = MyArray.of(7);
 			assert.deepEqual(arr, {"0": 7});
 			assert.strictEqual(arr.length, 1);
-		})
+		});
 	});
 
 	describe("MyArray.prototype.includes", function() {
