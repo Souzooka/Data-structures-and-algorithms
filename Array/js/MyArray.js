@@ -76,11 +76,13 @@ MyArray.prototype.fill = require("./fill");
 MyArray.prototype.flatten = require("./flatten");
 MyArray.prototype.indexOf = require("./indexOf");
 MyArray.prototype.includes = require("./includes");
+MyArray.prototype.join = require("./join");
 MyArray.prototype.pop = require("./pop");
 MyArray.prototype.push = require("./push");
 MyArray.prototype.reverse = require("./reverse");
 MyArray.prototype.shift = require("./shift");
 MyArray.prototype.slice = require("./slice");
+MyArray.prototype.toString = require("./toString");
 MyArray.prototype.unshift = require("./unshift");
 
 for (let prop in MyArray.prototype) {

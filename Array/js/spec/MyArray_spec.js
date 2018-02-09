@@ -246,6 +246,40 @@ describe("MyArray", function() {
 		});
 	});
 
+	describe("MyArray.prototype.join", function() {
+		it("should join the elements of an array into a string", function() {
+			let arr;
+			arr = MyArray.of(0, 1, 2, 3, 4);
+			assert.strictEqual(arr.join(), "0,1,2,3,4");
+		});
+		it("should join the elements of an array with a custom seperator", function() {
+			let arr;
+			arr = MyArray.of(0, 1, 2, 3, 4);
+			assert.strictEqual(arr.join(", "), "0, 1, 2, 3, 4");
+		});
+		it("should handle non-primitives", function() {
+			let arr;
+			arr = MyArray.of({}, []);
+			assert.strictEqual(arr.join(), "[object Object],");
+		});
+		it("should properly represent a sparse array", function() {
+			let arr;
+			arr = new MyArray(5);
+			assert.strictEqual(arr.join(), ",,,,");
+		});
+		it("should return empty string for empty array", function() {
+			let arr;
+			arr = new MyArray();
+			assert.strictEqual(arr.join(), "");
+		});
+		it("should handle null and undefined", function() {
+			let arr;
+			arr = Array.from(new MyArray(2));
+			arr.push(null);
+			assert.strictEqual(arr.join(), ",,");
+		});
+	});
+
 	describe("MyArray.prototype.pop", function() {
 		it("should return the last element of the array", function() {
 			let arr;
@@ -344,6 +378,12 @@ describe("MyArray", function() {
 			arr = MyArray.of(1, 2, 3, 4);
 			arr.slice();
 			assert.deepEqual(arr, MyArray.of(1, 2, 3, 4));
+		});
+	});
+
+	describe("MyArray.prototype.toString", function() {
+		it("should return a string representation of an array", function() {
+			assert.strictEqual(MyArray.of(undefined, null, 2, 3, "hello").toString(), "[,,2,3,hello]");
 		});
 	});
 
