@@ -5,13 +5,17 @@ describe("MyArray", function() {
 	describe("constructor", function() {
 		it("should initialize an empty MyArray when given no arguments", function() {
 			const arr = new MyArray();
-			assert.deepEqual(arr, {});
 			assert.strictEqual(arr.length, 0);
+			for (let key in arr) {
+				assert.fail();
+			}
 		});
 		it("should initialize a MyArray with given length", function() {
 			const arr = new MyArray(9);
-			assert.deepEqual(arr, {});
-			assert.deepEqual(arr.length, 9);
+			assert.strictEqual(arr.length, 9);
+			for (let key in arr) {
+				assert.fail();
+			}
 		});
 		it("should throw TypeError when given a non-numeric argument", function() {
 			assert.throws(_ => new MyArray("X8"), TypeError);
@@ -64,6 +68,16 @@ describe("MyArray", function() {
 			assert(!MyArray.isMyArray("nah"));
 			assert(!MyArray.isMyArray());
 			assert(!MyArray.isMyArray(undefined));
+		});
+	});
+
+	describe("MyArray.prototype[Symbol.iterator]", function() {
+		it("should return the values of MyArray", function() {
+			let arr = new MyArray();
+			for (let val of MyArray.of(8, "hello", 10, true)) {
+				arr.push(val);
+			}
+			assert.deepEqual(arr, {"0": 8, "1": "hello", "2": 10, "3": true});
 		});
 	});
 
@@ -178,9 +192,9 @@ describe("MyArray", function() {
 			arr = MyArray.of(1, 2, 3, 4);
 			assert.deepEqual(arr.slice(0, 2), {"0": 1, "1": 2});
 			assert.deepEqual(arr.slice(-2), {"0": 3, "1": 4});
-			assert.deepEqual(arr.slice(-2, 1), {});
+			assert.deepEqual(arr.slice(-2, 1), new MyArray());
 			assert.deepEqual(arr.slice(-2, -1), {"0": 3});
-			assert.deepEqual(arr.slice(3, 0), {});
+			assert.deepEqual(arr.slice(3, 0), new MyArray());
 			assert.deepEqual(arr.slice(), arr);
 			assert.deepEqual(arr.slice(0), arr);
 			assert.deepEqual(arr.slice(0, arr.length), arr);

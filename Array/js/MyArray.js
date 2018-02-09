@@ -69,6 +69,7 @@ MyArray.of = function() {
 
 module.exports = MyArray;
 
+MyArray.prototype[Symbol.iterator] = require("./Symbol.iterator");
 MyArray.prototype.indexOf = require("./indexOf");
 MyArray.prototype.includes = require("./includes");
 MyArray.prototype.pop = require("./pop");
