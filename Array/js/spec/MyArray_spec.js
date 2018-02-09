@@ -255,6 +255,7 @@ describe("MyArray", function() {
 		it("should return undefined if the array is empty", function() {
 			let arr = new MyArray();
 			assert.strictEqual(arr.pop(), undefined);
+			assert.strictEqual(arr.length, 0);
 		});
 		it("should modify the original array", function() {
 			let arr = MyArray.of(5, 3, 2);
@@ -301,6 +302,27 @@ describe("MyArray", function() {
 			reversed = arr.reverse();
 			assert.equal(reversed, arr);
 			assert.deepEqual(reversed, {"0": 3, "1": 2, "2": 1});
+		});
+	});
+
+	describe("MyArray.prototype.shift", function() {
+		it("should return the first element of an array", function() {
+			let arr;
+			arr = MyArray.of(1, 2, 3);
+			assert.strictEqual(arr.shift(), 1);
+		});
+		it("should return undefined for empty array", function() {
+			let arr;
+			arr = new MyArray();
+			assert.strictEqual(arr.shift(), undefined);
+			assert.strictEqual(arr.length, 0);
+		});
+		it("should mutate the original array", function() {
+			let arr;
+			arr = MyArray.of(1, 2, 3);
+			assert.strictEqual(arr.shift(), 1);
+			assert.strictEqual(arr.length, 2);
+			assert.deepEqual(arr, MyArray.of(2, 3));
 		});
 	});
 
