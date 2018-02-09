@@ -82,6 +82,24 @@ describe("MyArray", function() {
 		})
 	});
 
+	describe("MyArray.prototype.pop", function() {
+		it("should return the last element of the array", function() {
+			let arr;
+			arr = MyArray.from([1, 2, 3, 4]);
+			assert.strictEqual(arr.pop(), 4);
+		});
+		it("should return undefined if the array is empty", function() {
+			let arr = new MyArray();
+			assert.strictEqual(arr.pop(), undefined);
+		});
+		it("should modify the original array", function() {
+			let arr = MyArray.of(5, 3, 2);
+			arr.pop();
+			assert.deepEqual(arr, {"0": 5, "1": 3});
+			assert.strictEqual(arr.length, 2);
+		});
+	});
+
 	describe("MyArray.prototype.push", function() {
 		it("should append a new element onto an existing array", function() {
 			let arr;
