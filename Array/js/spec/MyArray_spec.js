@@ -346,4 +346,21 @@ describe("MyArray", function() {
 			assert.deepEqual(arr, MyArray.of(1, 2, 3, 4));
 		});
 	});
+
+	describe("MyArray.prototype.unshift", function() {
+		it("should return the new length of the array", function() {
+			let arr = MyArray.of(2, 3, 4, 5, 6);
+			assert.strictEqual(6, arr.unshift(1));
+		});
+		it("should prepend an element onto an array", function() {
+			let arr = MyArray.of(2, 3, 4, 5, 6);
+			arr.unshift(1);
+			assert.deepEqual(arr, MyArray.of(1, 2, 3, 4, 5, 6));
+		});
+		it("should prepend all arguments given onto an array", function() {
+			let arr = MyArray.of(4, 5, 6);
+			assert.strictEqual(arr.unshift(1, 2, 3), 6);
+			assert.deepEqual(arr, MyArray.of(1, 2, 3, 4, 5, 6));
+		});
+	});
 });
