@@ -5,7 +5,7 @@ class MyArray {
 		if (typeof length != "number") { throw new TypeError("MyArray's constructor was not given a number.")}
 		if (length < 0) { throw new Error("MyArray's constructor was given a negative number."); }
 		this.length = length;
-		Object.defineProperty(this, "length", {enumerable: false});
+		Object.defineProperty(this, "length", {enumerable: false, configurable: false});
 	}
 }
 
