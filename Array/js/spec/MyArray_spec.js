@@ -71,6 +71,21 @@ describe("MyArray", function() {
 		});
 	});
 
+	describe("MyArray.of", function() {
+		it("should return a new MyArray with given values", function() {
+			let arr;
+			assert.deepEqual(MyArray.of(), new MyArray());
+
+			arr = MyArray.of(undefined, undefined, undefined);
+			assert.deepEqual(arr, {"0": undefined, "1": undefined, "2": undefined});
+			assert.strictEqual(arr.length, 3);
+
+			arr = MyArray.of(7);
+			assert.deepEqual(arr, {"0": 7});
+			assert.strictEqual(arr.length, 1);
+		});
+	});
+
 	describe("MyArray.prototype[Symbol.iterator]", function() {
 		it("should return the values of MyArray", function() {
 			let arr = new MyArray();
@@ -107,20 +122,16 @@ describe("MyArray", function() {
 			assert.equal(modified, arr);
 			assert.deepEqual(modified, {"2": 2, "3": 2});
 		});
-	});
-
-	describe("MyArray.of", function() {
-		it("should return a new MyArray with given values", function() {
+		it("should copy an object and fill an array with that new reference", function() {
 			let arr;
-			assert.deepEqual(MyArray.of(), new MyArray());
-
-			arr = MyArray.of(undefined, undefined, undefined);
-			assert.deepEqual(arr, {"0": undefined, "1": undefined, "2": undefined});
-			assert.strictEqual(arr.length, 3);
-
-			arr = MyArray.of(7);
-			assert.deepEqual(arr, {"0": 7});
-			assert.strictEqual(arr.length, 1);
+			let modified;
+			let obj = {apple: "red"};
+			arr = new MyArray(2);
+			arr.fill(obj);
+			arr[0].apple = "blue";
+			assert.strictEqual(obj.apple, "red");
+			assert.strictEqual(arr[0].apple, "blue");
+			assert.equal(arr[0], arr[1]);
 		});
 	});
 
@@ -211,6 +222,29 @@ describe("MyArray", function() {
 			arr = new MyArray();
 			arr.push(2);
 			assert.strictEqual(arr.push(5), 2);
+		});
+	});
+
+	describe("MyArray.prototype.reverse", function() {
+		it("should reverse an array in place", function() {
+			let arr;
+			let reversed;
+
+			// also initializes holes
+			arr = new MyArray(3);
+			reversed = arr.reverse();
+			assert.equal(reversed, arr);
+			assert.deepEqual(reversed, {"0": undefined, "1": undefined, "2": undefined});
+
+			arr = MyArray.of(1, 2);
+			reversed = arr.reverse();
+			assert.equal(reversed, arr);
+			assert.deepEqual(reversed, {"0": 2, "1": 1});
+
+			arr = MyArray.of(1, 2, 3);
+			reversed = arr.reverse();
+			assert.equal(reversed, arr);
+			assert.deepEqual(reversed, {"0": 3, "1": 2, "2": 1});
 		});
 	});
 
