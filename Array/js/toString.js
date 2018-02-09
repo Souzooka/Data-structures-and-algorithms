@@ -1,3 +1,3 @@
-module.exports = function toString(seperator = ",") {
+module.exports = function toString() {
 	return "[" + this.join() + "]";
 }
