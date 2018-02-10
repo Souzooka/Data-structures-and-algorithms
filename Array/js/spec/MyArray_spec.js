@@ -455,6 +455,27 @@ describe("MyArray", function() {
 		});
 	});
 
+	describe("MyArray.prototype.some", function() {
+		it("should return a boolean indicating if any elements in array matches the passed predicate", function() {
+			let arr;
+			arr = MyArray.of(false, false, false);
+			assert(!arr.some(v => v));
+			arr = MyArray.of(false, false, true);
+			assert(arr.some(v => v));
+			arr = MyArray.of(0, 0, 0);
+			assert(arr.some((_, i) => i == 2));
+			assert(!arr.some((_, i) => i == 3));
+			arr = MyArray.of(1, 2, 3);
+			assert(arr.some((v, _, a) => a.includes(v)));
+			assert(!arr.some((v, _, a) => a.includes(v + 3)));
+		});
+		it("should accept a second argument indicating the context of the predicate", function() {
+			let arr;
+			arr = MyArray.of(4, 5, 6);
+			assert(arr.some(function(v) { return v == this.length; }, new MyArray(5)));
+		});
+	});
+
 	describe("MyArray.prototype.toString", function() {
 		it("should return a string representation of an array", function() {
 			assert.strictEqual(MyArray.of(undefined, null, 2, 3, "hello").toString(), "[,,2,3,hello]");
