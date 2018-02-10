@@ -80,6 +80,7 @@ MyArray.prototype.flatten = require("./flatten");
 MyArray.prototype.indexOf = require("./indexOf");
 MyArray.prototype.includes = require("./includes");
 MyArray.prototype.join = require("./join");
+MyArray.prototype.lastIndexOf = require("./lastIndexOf");
 MyArray.prototype.pop = require("./pop");
 MyArray.prototype.push = require("./push");
 MyArray.prototype.reverse = require("./reverse");
