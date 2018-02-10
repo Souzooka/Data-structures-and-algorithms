@@ -209,6 +209,7 @@ describe("MyArray", function() {
 			assert.deepEqual(arr.filter((_, i) => i > 3), MyArray.of(5, 6));
 			assert.deepEqual(arr.filter((_, __, a) => a.length > 6), new MyArray());
 			assert.deepEqual(arr.filter((_, __, a) => a.length == 6), MyArray.of(1, 2, 3, 4, 5, 6));
+			assert.deepEqual(arr.filter(function(v) { return v == this.length; }), MyArray.of(6));
 		});
 		it("should accept a second argument that indicates the context of the passed function", function() {
 			let arr;
@@ -220,6 +221,10 @@ describe("MyArray", function() {
 			arr = MyArray.of(1, 2, 3, 4, 5, 6);
 			arr.filter(v => v % 2 == 0);
 			assert.deepEqual(arr, MyArray.of(1, 2, 3, 4, 5, 6));
+		});
+		it("should not process indexes that are not assigned to", function() {
+			let arr = new MyArray(3);
+			assert.deepEqual(arr.filter(v => v == undefined), new MyArray());
 		});
 	});
 
