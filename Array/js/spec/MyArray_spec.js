@@ -137,6 +137,35 @@ describe("MyArray", function() {
 		});
 	});
 
+	describe("MyArray.prototype.copyWithin", function() {
+		it("should insert a shallow copy of a segment of an array into an array", function() {
+			let arr;
+			arr = MyArray.of(1, 2, 3, 4, 5);
+			arr.copyWithin(-2);
+			assert.deepEqual(arr, MyArray.of(1, 2, 3, 1, 2));
+
+			arr = MyArray.of(1, 2, 3, 4, 5);
+			arr.copyWithin(0, 3);
+			assert.deepEqual(arr, MyArray.of(4, 5, 3, 4, 5));
+
+			arr = MyArray.of(1, 2, 3, 4, 5);
+			arr.copyWithin(0, 3, 4);
+			assert.deepEqual(arr, MyArray.of(4, 2, 3, 4, 5));
+
+			arr = MyArray.of(1, 2, 3, 4, 5);
+			arr.copyWithin(0, -3, -2);
+			assert.deepEqual(arr, MyArray.of(3, 2, 3, 4, 5));
+
+			arr = MyArray.of(1, 2, 3, 4, 5);
+			arr.copyWithin(-2, -3, -2);
+			assert.deepEqual(arr, MyArray.of(1, 2, 3, 3, 5));
+
+			arr = MyArray.of(1, 2, 3, 4, 5);
+			arr.copyWithin(2, -4, -1);
+			assert.deepEqual(arr, MyArray.of(1, 2, 2, 3, 4));
+		});
+	});
+
 	describe("MyArray.prototype.fill", function() {
 		it("should fill a MyArray with a value", function() {
 			let arr;

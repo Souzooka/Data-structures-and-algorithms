@@ -72,6 +72,7 @@ module.exports = MyArray;
 // prototype methods
 MyArray.prototype[Symbol.iterator] = require("./Symbol.iterator");
 MyArray.prototype.concat = require("./concat");
+MyArray.prototype.copyWithin = require("./copyWithin");
 MyArray.prototype.fill = require("./fill");
 MyArray.prototype.flatten = require("./flatten");
 MyArray.prototype.indexOf = require("./indexOf");
