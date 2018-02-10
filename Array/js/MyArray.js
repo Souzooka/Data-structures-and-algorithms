@@ -12,12 +12,11 @@ function MyArray(length = 0) {
 	Object.defineProperty(this, "length", {enumerable: false, configurable: false});
 	return new Proxy(this, {
 		set: function(target, property, value) {
-			if (/^\d+$/.test(property)) {
-				if (Number(property) >= target.length) {
-					target.length = Number(property) + 1;
-				}
-			}
 			target[property] = value;
+			let idx = Number(property)
+			if (!Number.isNaN(idx) && idx >= target.length && 0 <= idx && idx < Math.pow(2, 32) - 1) {
+				target.length = Number(property) + 1;
+			}
 		}
 	});
 }

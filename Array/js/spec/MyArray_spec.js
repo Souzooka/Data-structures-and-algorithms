@@ -20,6 +20,12 @@ describe("MyArray", function() {
 		it("should throw TypeError when given a non-numeric argument", function() {
 			assert.throws(_ => new MyArray("X8"), TypeError);
 		});
+		it("should be initializable without the new keyword", function() {
+			let arr;
+			arr = MyArray.of(...MyArray(3)).map((_, i) => i);
+			assert.deepEqual(arr, MyArray.of(0, 1, 2));
+			assert.strictEqual(arr.length, 3);
+		});
 	});
 
 	describe("length property", function() {
@@ -28,6 +34,20 @@ describe("MyArray", function() {
 			arr = new MyArray();
 			arr[2] = 1;
 			assert.strictEqual(arr.length, 3);
+			arr[4] = 16;
+			assert.strictEqual(arr.length, 5);
+		});
+		it("should not change length for non-integral props or integral props not in range", function() {
+			let arr;
+			arr = new MyArray();
+			arr[Math.pow(2, 32) - 1] = 1;
+			assert.strictEqual(arr.length, 0);
+			arr = new MyArray();
+			arr[-1] = 21;
+			assert.strictEqual(arr.length, 0);
+			arr = new MyArray();
+			arr["apple"] = "red";
+			assert.strictEqual(arr.length, 0);
 		});
 	});
 
@@ -104,8 +124,8 @@ describe("MyArray", function() {
 			assert.deepEqual(arr, {"0": 8, "1": "hello", "2": 10, "3": true});
 		});
 		it("should initialize holes in sparse MyArray", function() {
-			let arr = [...new MyArray(5)];
-			assert.deepEqual(arr, Array.of(undefined, undefined, undefined, undefined, undefined));
+			let arr = MyArray.of(...new MyArray(5));
+			assert.deepEqual(arr, MyArray.of(undefined, undefined, undefined, undefined, undefined));
 		});
 	});
 
