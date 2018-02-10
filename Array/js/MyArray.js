@@ -74,6 +74,7 @@ MyArray.prototype[Symbol.iterator] = require("./Symbol.iterator");
 MyArray.prototype.concat = require("./concat");
 MyArray.prototype.copyWithin = require("./copyWithin");
 MyArray.prototype.fill = require("./fill");
+MyArray.prototype.filter = require("./filter");
 MyArray.prototype.flatten = require("./flatten");
 MyArray.prototype.indexOf = require("./indexOf");
 MyArray.prototype.includes = require("./includes");

@@ -201,6 +201,28 @@ describe("MyArray", function() {
 		});
 	});
 
+	describe("MyArray.prototype.filter", function() {
+		it("should filter an array based on a predicate", function() {
+			let arr;
+			arr = MyArray.of(1, 2, 3, 4, 5, 6);
+			assert.deepEqual(arr.filter(v => v % 2 == 0), MyArray.of(2, 4, 6));
+			assert.deepEqual(arr.filter((_, i) => i > 3), MyArray.of(5, 6));
+			assert.deepEqual(arr.filter((_, __, a) => a.length > 6), new MyArray());
+			assert.deepEqual(arr.filter((_, __, a) => a.length == 6), MyArray.of(1, 2, 3, 4, 5, 6));
+		});
+		it("should accept a second argument that indicates the context of the passed function", function() {
+			let arr;
+			arr = MyArray.of(1, 2, 3, 4, 5, 6);
+			assert.deepEqual(arr.filter(function(v) { return v == this.length }, new MyArray(3)), MyArray.of(3));
+		});
+		it("should not mutate the original array", function() {
+			let arr;
+			arr = MyArray.of(1, 2, 3, 4, 5, 6);
+			arr.filter(v => v % 2 == 0);
+			assert.deepEqual(arr, MyArray.of(1, 2, 3, 4, 5, 6));
+		});
+	});
+
 	describe("MyArray.prototype.flatten", function() {
 		it("should not mutate the original array", function() {
 			let arr = MyArray.of(1, MyArray.of(2, 3), 4);
