@@ -389,6 +389,35 @@ describe("MyArray", function() {
 		});
 	});
 
+	describe("MyArray.prototype.map", function() {
+		it("should transform an array given a transform function", function() {
+			let arr;
+			arr = MyArray.of(3, 4, 5, 6, 7, 8);
+			assert.deepEqual(arr.map(v => v * 2), MyArray.of(6, 8, 10, 12, 14, 16));
+			assert.deepEqual(arr.map((_, i) => i), MyArray.of(0, 1, 2, 3, 4, 5));
+			assert.deepEqual(arr.map((_, __, a) => a.length), MyArray.of(6, 6, 6, 6, 6, 6));
+		});
+		it("should not process holes in an array", function() {
+			let arr;
+			arr = new MyArray(3);
+			arr[2] = 2;
+			assert.deepEqual(arr.map(v => v * v), MyArray.of(4));
+			assert.strictEqual(arr.map(v => v * v).length, 1);
+		});
+		it("should not mutate the original array", function() {
+			let arr;
+			arr = MyArray.of(2, 4, 6, 8, 10);
+			arr.map(v => v * v);
+			assert.deepEqual(arr, MyArray.of(2, 4, 6, 8, 10));
+			assert.strictEqual(arr.length, 5);
+		});
+		it("should accept a second argument which serves as the context of the transform function", function() {
+			let arr;
+			arr = MyArray.of(2, 4, 6, 8, 10);
+			assert.deepEqual(arr.map(function(v) { return this.length; }, new MyArray(3)), MyArray.of(3, 3, 3, 3, 3));
+		});
+	});
+
 	describe("MyArray.prototype.pop", function() {
 		it("should return the last element of the array", function() {
 			let arr;
