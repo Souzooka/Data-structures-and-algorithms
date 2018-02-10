@@ -1,12 +1,25 @@
 // Class definition and static methods
 
-class MyArray {
-	constructor(length = 0) {
-		if (typeof length != "number") { throw new TypeError("MyArray's constructor was not given a number.")}
-		if (length < 0) { throw new Error("MyArray's constructor was given a negative number."); }
-		this.length = length;
-		Object.defineProperty(this, "length", {enumerable: false, configurable: false});
+function MyArray(length = 0) {
+	// if constructor is called without "new"
+	if (!(this instanceof MyArray)) {
+		return new MyArray(length);
 	}
+
+	if (typeof length != "number") { throw new TypeError("MyArray's constructor was not given a number.")}
+	if (length < 0) { throw new Error("MyArray's constructor was given a negative number."); }
+	this.length = length;
+	Object.defineProperty(this, "length", {enumerable: false, configurable: false});
+	return new Proxy(this, {
+		set: function(target, property, value) {
+			if (/^\d+$/.test(property)) {
+				if (Number(property) >= target.length) {
+					target.length = Number(property) + 1;
+				}
+			}
+			target[property] = value;
+		}
+	});
 }
 
 MyArray.from = function(iterable, transform = x => x, context = iterable) {

@@ -22,6 +22,15 @@ describe("MyArray", function() {
 		});
 	});
 
+	describe("length property", function() {
+		it("should be updated when an integer index, equal to or greater than the array's length, is assigned", function() {
+			let arr;
+			arr = new MyArray();
+			arr[2] = 1;
+			assert.strictEqual(arr.length, 3);
+		});
+	});
+
 	describe("MyArray.from", function() {
 		it("should initialize a new MyArray when given an iterable", function() {
 			assert.deepEqual(MyArray.from([1, 2, 3]), {"0": 1, "1": 2, "2": 3});
