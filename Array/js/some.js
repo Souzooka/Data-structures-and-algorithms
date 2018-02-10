@@ -1,8 +1,8 @@
 module.exports = function some(predicate, thisArg = this) {
 	predicate = predicate.bind(thisArg);
 
-	for (let i = 0; i < this.length; ++i) {
-		if (this.hasOwnProperty(i) && predicate(this[i], i, this)) {
+	for (let idx in this) {
+		if (predicate(this[idx], idx, this)) {
 			return true;
 		}
 	}
