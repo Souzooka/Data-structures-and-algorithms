@@ -265,6 +265,40 @@ describe("MyArray", function() {
 		});
 	});
 
+	describe("MyArray.prototype.forEach", function() {
+		it("should execute a callback for each element in array", function() {
+			let arr;
+			arr = MyArray.of(1, 2, 3);
+			let counter = 0;
+			arr.forEach(v => counter += v);
+			assert.strictEqual(counter, 6);
+			counter = 0;
+			arr.forEach((v, i) => counter += i);
+			assert.strictEqual(counter, 3);
+			counter = 0;
+			arr.forEach((v, i, a) => counter += a.length);
+			assert.strictEqual(counter, 9);
+		});
+		it("should return undefined", function() {
+			let arr;
+			arr = MyArray.of(1, 2, 3);
+			assert.equal(arr.forEach(v => v), undefined);
+		});
+		it("should take a context to use if provided as second argument", function() {
+			let arr;
+			arr = MyArray.of(1, 2, 3);
+			let counter = 0;
+			arr.forEach(function() { counter += this.length; }, arr);
+			assert.strictEqual(counter, 9);
+		});
+		it("should not mutate the original array", function() {
+			let arr;
+			arr = MyArray.of(1, 2, 3);
+			arr.forEach((v, i, a) => v + i + a.length);
+			assert.deepEqual(arr, MyArray.of(1, 2, 3));
+		});
+	});
+
 	describe("MyArray.prototype.includes", function() {
 		it("should return a boolean indicating if the array contains a value", function() {
 			let arr;
