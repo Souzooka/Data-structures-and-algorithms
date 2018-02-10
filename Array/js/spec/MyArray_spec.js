@@ -166,6 +166,24 @@ describe("MyArray", function() {
 		});
 	});
 
+	describe("MyArray.prototype.every", function() {
+		it("should return a boolean indicating if every element in an array returns true when passed to predicate", function() {
+			let arr;
+			arr = MyArray.of(2, 4, 6);
+			assert(arr.every(v => v % 2 == 0));
+			assert(!arr.every(v => v % 2 != 0));
+			assert(arr.every((_, i) => i < 3));
+			assert(!arr.every((_, i) => i > 3));
+			assert(arr.every((_, __, a) => a.length == 3));
+			assert(!arr.every((_, __, a) => a.length != 3));
+		});
+		it("should accept a second argument indiciating the context of the predicate", function() {
+			let arr;
+			arr = MyArray.of(2, 4, 6);
+			assert(arr.every(function(v) { return this.length % v == 0; }, new MyArray(12)));
+		});
+	});
+
 	describe("MyArray.prototype.fill", function() {
 		it("should fill a MyArray with a value", function() {
 			let arr;
