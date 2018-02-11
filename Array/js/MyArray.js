@@ -1,5 +1,16 @@
 // Class definition and static methods
 
+// proxy handler for MyArray
+const MyArrayhandler = {
+	set: function(target, property, value) {
+		target[property] = value;
+		let idx = Number(property)
+		if (!Number.isNaN(idx) && idx >= target.length && MyArray.__minLength <= idx && idx < MyArray.__maxLength) {
+			target.length = Number(property) + 1;
+		}
+	}
+}
+
 function MyArray(length = 0) {
 	// if constructor is called without "new"
 	if (!(this instanceof MyArray)) {
@@ -8,18 +19,37 @@ function MyArray(length = 0) {
 
 	if (typeof length != "number") { throw new TypeError("MyArray's constructor was not given a number.")}
 	if (length < 0) { throw new Error("MyArray's constructor was given a negative number."); }
-	this.length = length;
-	Object.defineProperty(this, "length", {enumerable: false, configurable: false});
-	return new Proxy(this, {
-		set: function(target, property, value) {
-			target[property] = value;
-			let idx = Number(property)
-			if (!Number.isNaN(idx) && idx >= target.length && 0 <= idx && idx < Math.pow(2, 32) - 1) {
-				target.length = Number(property) + 1;
+
+	this._length = length;
+	Object.defineProperty(this, "_length", {enumerable: false, configurable: false});
+	Object.defineProperty(this, "length", {enumerable: false, configurable: false, 
+		set: function(value) {
+			if (value < MyArray.__minLength || MyArray.__maxLength < value || typeof value != "number" || value % 1 != 0) {
+				throw new RangeError("Invalid MyArray length");
 			}
+
+			// truncate array if necessary
+			if (value < this._length) {
+				for (let key in this) {
+					if (Number(key) >= value) {
+						delete this[key];
+					}
+				}
+			}
+			this._length = value;
+		},
+		get: function() {
+			return this._length;
 		}
 	});
+	return new Proxy(this, MyArrayhandler);
 }
+
+// Acceptable range for the length of a MyArray;
+MyArray.__maxLength = Math.pow(2, 32) - 1;
+MyArray.__minLength = 0;
+Object.defineProperty(MyArray, "__maxLength", {enumerable: false, configurable: false, writable: false});
+Object.defineProperty(MyArray, "__minLength", {enumerable: false, configurable: false, writable: false});
 
 MyArray.from = function(iterable, transform = x => x, context = iterable) {
 	transform = transform.bind(context);

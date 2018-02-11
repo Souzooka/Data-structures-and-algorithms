@@ -49,6 +49,15 @@ describe("MyArray", function() {
 			arr["apple"] = "red";
 			assert.strictEqual(arr.length, 0);
 		});
+		it("should throw RangeError if non-integral value or value out of range is assigned to it", function() {
+			let arr;
+			arr = new MyArray();
+			assert.throws(_ => arr.length = -1, RangeError);
+			assert.throws(_ => arr.length = Math.pow(2, 32), RangeError);
+			assert.throws(_ => arr.length = "hello", RangeError);
+
+			assert.doesNotThrow(_ => arr.length = Math.pow(2, 32) - 1);
+		});
 	});
 
 	describe("MyArray.from", function() {
