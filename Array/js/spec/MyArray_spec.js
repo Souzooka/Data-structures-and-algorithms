@@ -324,6 +324,33 @@ describe("MyArray", function() {
 		});
 	});
 
+	describe("MyArray.prototype.findIndex", function() {
+		it("should return the index of the first element which passes a predicate", function() {
+			let arr;
+			arr = MyArray.of(1, 2, 3, true, "hello");
+
+			assert.strictEqual(arr.findIndex(v => v % 2 === 0), 1);
+			assert.strictEqual(arr.findIndex(v => v.length == 5), 4);
+			assert.strictEqual(arr.findIndex(v => v === true), 3);
+			assert.strictEqual(arr.findIndex((v, i) => i === 2), 2);
+			assert.strictEqual(arr.findIndex((v, i, a) => i === a.length - 1), 4);
+		});
+		it("should return -1 if no element passes the predicate", function() {
+			let arr;
+			arr = MyArray.of(1, 2, 3, true, "hello");
+
+			assert.strictEqual(arr.findIndex(v => !v), -1);
+			assert.strictEqual(arr.findIndex((v, i, a) => a.length == 6), -1)
+			assert.strictEqual(arr.findIndex((v, i, a) => i == a.length), -1);
+		});
+		it("should accept a second argument to use as context for predicate", function() {
+			let arr;
+			arr = MyArray.of(1, 2, 3, true, "hello");
+
+			assert.strictEqual(arr.findIndex(function(v, i) { return i == this.length; }, new MyArray(4)), 4);
+		});
+	});
+
 	describe("MyArray.prototype.flatten", function() {
 		it("should not mutate the original array", function() {
 			let arr = MyArray.of(1, MyArray.of(2, 3), 4);
