@@ -204,6 +204,19 @@ describe("MyArray", function() {
 		});
 	});
 
+	describe("MyArray.prototype.entries", function() {
+		it("should return an iterator object yielding MyArray in the format of [key, value] for each element", function() {
+			let arr;
+			let entries;
+			arr = MyArray.of("a", "b", "c");
+			entries = arr.entries();
+
+			assert.deepEqual(entries.next().value, MyArray.of(0, "a"));
+			assert.deepEqual(entries.next().value, MyArray.of(1, "b"));
+			assert.deepEqual(entries.next().value, MyArray.of(2, "c"));
+		})
+	});
+
 	describe("MyArray.prototype.every", function() {
 		it("should return a boolean indicating if every element in an array returns true when passed to predicate", function() {
 			let arr;
