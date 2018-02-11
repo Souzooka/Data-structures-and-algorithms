@@ -439,6 +439,31 @@ describe("MyArray", function() {
 		});
 	});
 
+	describe("MyArray.prototype.keys", function() {
+		it("should return an iterator which yields integral keys of MyArray", function() {
+			let arr;
+			let iterator;
+			arr = MyArray.of("a", "b", "c");
+			iterator = arr.keys();
+
+			assert.strictEqual(iterator.next().value, 0);
+			assert.strictEqual(iterator.next().value, 1);
+			assert.strictEqual(iterator.next().value, 2);
+			assert(iterator.next().done);
+		});
+		it("should ignore holes in sparse array", function() {
+			let arr;
+			let iterator;
+			arr = new MyArray(3);
+			iterator = arr.keys();
+
+			assert.strictEqual(iterator.next().value, 0);
+			assert.strictEqual(iterator.next().value, 1);
+			assert.strictEqual(iterator.next().value, 2);
+			assert(iterator.next().done);
+		});
+	});
+
 	describe("MyArray.prototype.lastIndexOf", function() {
 		it("should locate the index of an element in an array", function() {
 			let arr;
