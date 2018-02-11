@@ -119,6 +119,7 @@ MyArray.prototype.entries = require("./entries");
 MyArray.prototype.every = require("./every");
 MyArray.prototype.fill = require("./fill");
 MyArray.prototype.filter = require("./filter");
+MyArray.prototype.find = require("./find");
 MyArray.prototype.flatten = require("./flatten");
 MyArray.prototype.forEach = require("./forEach");
 MyArray.prototype.indexOf = require("./indexOf");
