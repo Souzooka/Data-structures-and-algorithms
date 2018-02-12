@@ -30,9 +30,16 @@ function MyArray(length = 0) {
 
 			// truncate array if necessary
 			if (value < this._length) {
-				for (let key in this) {
-					if (Number(key) >= value) {
-						delete this[key];
+
+				// special handler for popping values so that it is not linear time
+				if (value == this.length - 1) {
+					delete this[this.length - 1];
+				} else {
+					// delete any keys equal to or greater than the new length
+					for (let key in this) {
+						if (Number(key) >= value) {
+							delete this[key];
+						}
 					}
 				}
 			}
