@@ -3,6 +3,33 @@
 // proxy handler for MyArray
 const MyArrayhandler = {
 	set: function(target, property, value) {
+
+		// Logic for setting length
+		if (property == "length") {
+			if (value < MyArray.__minLength || MyArray.__maxLength < value || typeof value != "number" || value % 1 != 0) {
+				throw new RangeError("Invalid MyArray length");
+			}
+
+			// truncate array if necessary
+			if (value < target.length) {
+
+				// special handler for popping values so that it is not linear time
+				if (value == target.length - 1) {
+					delete target[target.length - 1];
+				} else {
+					// delete any keys equal to or greater than the new length
+					for (let key in target) {
+						if (Number(key) >= value) {
+							delete target[key];
+						}
+					}
+				}
+			}
+			target[property] = value;
+			return;
+		}
+
+		// Update length if numeric property is set
 		target[property] = value;
 		let idx = Number(property)
 		if (!Number.isNaN(idx) && idx >= target.length && MyArray.__minLength <= idx && idx < MyArray.__maxLength) {
@@ -20,35 +47,8 @@ function MyArray(length = 0) {
 	if (typeof length != "number") { throw new TypeError("MyArray's constructor was not given a number.")}
 	if (length < 0) { throw new Error("MyArray's constructor was given a negative number."); }
 
-	this._length = length;
-	Object.defineProperty(this, "_length", {enumerable: false, configurable: false});
-	Object.defineProperty(this, "length", {enumerable: false, configurable: false, 
-		set: function(value) {
-			if (value < MyArray.__minLength || MyArray.__maxLength < value || typeof value != "number" || value % 1 != 0) {
-				throw new RangeError("Invalid MyArray length");
-			}
-
-			// truncate array if necessary
-			if (value < this._length) {
-
-				// special handler for popping values so that it is not linear time
-				if (value == this.length - 1) {
-					delete this[this.length - 1];
-				} else {
-					// delete any keys equal to or greater than the new length
-					for (let key in this) {
-						if (Number(key) >= value) {
-							delete this[key];
-						}
-					}
-				}
-			}
-			this._length = value;
-		},
-		get: function() {
-			return this._length;
-		}
-	});
+	this.length = length;
+	Object.defineProperty(this, "length", {enumerable: false, configurable: false});
 	return new Proxy(this, MyArrayhandler);
 }
 
