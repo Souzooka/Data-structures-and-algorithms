@@ -644,6 +644,13 @@ describe("MyArray", function() {
 			assert.throws(_ => MyArray().reduce((p, c) => p + c), TypeError);
 			assert.throws(_ => MyArray(3).reduce((p, c) => p + c), TypeError);
 		});
+		it("should not process holes in array", function() {
+			let arr;
+			arr = new MyArray();
+			arr[0] = 1;
+			arr[10] = 1;
+			assert.strictEqual(arr.reduce((p, c, i) => p + i, 0), 10);
+		});
 	});
 
 	describe("MyArray.prototype.reverse", function() {

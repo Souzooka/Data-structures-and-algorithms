@@ -43,7 +43,7 @@ module.exports = function reduce(accFn, initialSeed) {
 
 	// apply the accumulator function against each element in the called-upon array
 	for (; i < keys.length; ++i) {
-		seed = accFn(seed, this[keys[i]], i, this);
+		seed = accFn(seed, this[keys[i]], Number(keys[i]), this);
 	}
 
 	return seed;
