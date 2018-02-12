@@ -15,7 +15,6 @@
 		Performs a check against all array elements using a predicate,
 		and returns a boolean indicating whether all array elements pass
 		that check.
-
 		Not as robust/generic as Array.prototype.every, and may
 		have undesired behavior if called with a non-MyArray object.
 */
