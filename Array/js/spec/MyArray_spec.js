@@ -653,6 +653,41 @@ describe("MyArray", function() {
 		});
 	});
 
+	describe("MyArray.prototype.reduceRight", function() {
+		it("should accumulate all elements in an array given a function", function() {
+			assert.strictEqual(MyArray.of(1, 2, 3, 4).reduceRight((p, c) => p + c), 10);
+			assert.strictEqual(MyArray.of(1, 2, 3, 4).reduceRight((p, c) => p * c), 24);
+			assert.strictEqual(MyArray.of(1, 2, 3, 4).reduceRight((p, c) => p - c), -2);
+			assert.strictEqual(MyArray.of(1, 2, 3, 4).reduceRight((p, c, i) => p + i), 7);
+			assert.strictEqual(MyArray.of(1, 2, 3, 4).reduceRight((p, c, i, a) => p + a.length), 16);
+		});
+		it("should accept an initial seed for its second argument", function() {
+			assert.strictEqual(MyArray.of(1, 2, 3, 4).reduceRight((p, c) => p + c, 100), 110);
+			assert.strictEqual(MyArray.of(1, 2, 3, 4).reduceRight((p, c) => p * c, 100), 2400);
+			assert.strictEqual(MyArray.of(1, 2, 3, 4).reduceRight((p, c) => p - c, 100), 90);
+			assert.strictEqual(MyArray.of(1, 2, 3, 4).reduceRight((p, c, i) => p + i, 100), 106);
+			assert.strictEqual(MyArray.of(1, 2, 3, 4).reduceRight((p, c, i, a) => p + a.length, 100), 116);
+		});
+		it("should throw a TypeError if not given a function as its first argument", function() {
+			assert.throws(_ => MyArray.of(1, 2, 3, 4).reduceRight(1), TypeError);
+			assert.throws(_ => MyArray.of(1, 2, 3, 4).reduceRight("hello"), TypeError);
+			assert.throws(_ => MyArray.of(1, 2, 3, 4).reduceRight({}), TypeError);
+			assert.throws(_ => MyArray.of(1, 2, 3, 4).reduceRight(), TypeError);
+			assert.throws(_ => MyArray.of(1, 2, 3, 4).reduceRight(null), TypeError);
+		});
+		it("should throw a TypeError if reduce is called on empty array without a second argument provided", function() {
+			assert.throws(_ => MyArray().reduceRight((p, c) => p + c), TypeError);
+			assert.throws(_ => MyArray(3).reduceRight((p, c) => p + c), TypeError);
+		});
+		it("should not process holes in array", function() {
+			let arr;
+			arr = new MyArray();
+			arr[0] = 1;
+			arr[10] = 1;
+			assert.strictEqual(arr.reduceRight((p, c, i) => p + i, 0), 10);
+		});
+	});
+
 	describe("MyArray.prototype.reverse", function() {
 		it("should reverse an array in place", function() {
 			let arr;

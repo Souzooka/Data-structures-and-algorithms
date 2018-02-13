@@ -11,7 +11,7 @@
 			Argument that is used as the initial seed for the accumulator function.
 	Return value:
 		The result of the accumulator function being run against each element in an array,
-		left to right.
+		right to left.
 	Behavior/remarks:
 		Throws TypeError if reduce is called on an empty array without an
 		initialSeed argument being passed.
@@ -19,7 +19,7 @@
 		Throws TypeError if the first argument is not a function.
 */
 
-module.exports = function reduce(accFn, initialSeed) {
+module.exports = function reduceRight(accFn, initialSeed) {
 	let i;
 	let seed;
 	let keys = Object.keys(this);
@@ -31,18 +31,18 @@ module.exports = function reduce(accFn, initialSeed) {
 
 	// check if initialSeed was given as an argument
 	if (arguments.length >= 2) {
-		i = 0;
+		i = keys.length - 1;
 		seed = initialSeed;
 	} else {
 		if (keys.length == 0) {
 			throw new TypeError("TypeError: Reduce of empty array with no initial value");
 		}
-		i = 1;
-		seed = this[keys[0]];
+		i = keys.length - 2;
+		seed = this[keys[keys.length - 1]];
 	}
 
 	// apply the accumulator function against each element in the called-upon array
-	for (; i < keys.length; ++i) {
+	for (; i >= 0; --i) {
 		seed = accFn(seed, this[keys[i]], Number(keys[i]), this);
 	}
 
