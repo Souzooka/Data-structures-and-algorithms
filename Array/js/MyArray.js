@@ -144,6 +144,7 @@ MyArray.prototype.reverse = require("./reverse");
 MyArray.prototype.shift = require("./shift");
 MyArray.prototype.slice = require("./slice");
 MyArray.prototype.some = require("./some");
+MyArray.prototype.sort = require("./sort/index");
 MyArray.prototype.toString = require("./toString");
 MyArray.prototype.unshift = require("./unshift");
 

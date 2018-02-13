@@ -774,6 +774,13 @@ describe("MyArray", function() {
 		});
 	});
 
+	describe("MyArray.prototype.sort", function() {
+		it("should sort an array", function() {
+			// TODO - more sorting tests
+			assert.deepEqual(MyArray.of(45, 123, 1, 0, 23, 93, 2, 4, 1).sort((a, b) => a - b, "quickSort"), MyArray.of(0, 1, 1, 2, 4, 23, 45, 93, 123));
+		});
+	});
+
 	describe("MyArray.prototype.toString", function() {
 		it("should return a string representation of an array", function() {
 			assert.strictEqual(MyArray.of(undefined, null, 2, 3, "hello").toString(), "[,,2,3,hello]");
