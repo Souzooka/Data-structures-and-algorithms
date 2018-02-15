@@ -15,7 +15,6 @@ function LinkedList(...nodes) {
 
 LinkedList.isLinkedList = function isLinkedList(ll) {
   if (ll == null) { return false; }
-  if (ll == undefined) { return false; }
   if (typeof ll != "object") { return false; }
 
   return ll.constructor.name === "LinkedListNode";

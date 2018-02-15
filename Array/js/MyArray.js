@@ -100,7 +100,6 @@ MyArray.from = function(iterable, transform = x => x, context = iterable) {
 // but here's my own hack instead.
 MyArray.isMyArray = function(myArray) {
   if (myArray == null) { return false; }
-  if (myArray == undefined) { return false; }
   if (typeof myArray != "object") { return false; }
 
   return myArray.constructor.name === "MyArray";
