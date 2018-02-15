@@ -9,11 +9,13 @@ module.exports = function addLast(node) {
   if (this.first === null) {
     this.first = node;
     this.last = node;
+    this.first.list = this;
     return;
   }
 
   this.last.next = node;
   node.previous = this.last;
   this.last = node;
+  this.last.list = this;
   return;
 };

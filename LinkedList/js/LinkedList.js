@@ -13,11 +13,12 @@ function LinkedList(...nodes) {
   }
 };
 
-LinkedList.isLinkedList = function isLinkedList(node) {
-  if (node === null || node === undefined) { return false; }
-  if (!node.hasOwnProperty(constructor)) { return false; }
-  if (node.constructor === null || node.constructor === undefined) { return false; }
-  return node.constructor.name === "LinkedList";
+LinkedList.isLinkedList = function isLinkedList(ll) {
+  if (ll == null) { return false; }
+  if (ll == undefined) { return false; }
+  if (typeof ll != "object") { return false; }
+
+  return ll.constructor.name === "LinkedListNode";
 };
 
 module.exports = LinkedList;
