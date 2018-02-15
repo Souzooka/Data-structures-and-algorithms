@@ -1,3 +1,3 @@
 module.exports = function toString() {
-	return "[" + this.join() + "]";
+  return "[" + this.join() + "]";
 }
