@@ -1,5 +1,5 @@
-function LinkedListNode(data, next = null, previous = null) {
-  this.data = data;
+function LinkedListNode(value, next = null, previous = null) {
+  this.value = value;
   this.next = next;
   this.previous = previous;
 }
