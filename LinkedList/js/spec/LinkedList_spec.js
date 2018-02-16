@@ -11,6 +11,11 @@ describe("LinkedListNode", function() {
       assert.strictEqual(node.previous, null);
       assert.strictEqual(node.list, null);
     });
+    it("should throw TypeError if given invalid inputs", function() {
+      assert.throws(() => new LinkedListNode(9, {}), TypeError);
+      assert.throws(() => new LinkedListNode(9, new LinkedListNode(1), {}), TypeError);
+      assert.throws(() => new LinkedListNode(9, new LinkedListNode(1), new LinkedListNode(2), {}, TypeError);
+    });
   });
   describe("LinkedListNode.isLinkedListNode", function() {
     it("should ascertain if object is LinkedListNode", function() {
