@@ -57,4 +57,14 @@ describe("LinkedList", function() {
       assert.deepEqual(ll.last.previous.previous.value, 0, "failure asserting ll.last.previous.previous.value of linked list with 3 nodes");
     });
   });
+
+  describe("LinkedList.isLinkedList", function() {
+    it("should ascertain if object is LinkedList", function() {
+      assert(!LinkedList.isLinkedList(null), "null is not a LinkedList");
+      assert(!LinkedList.isLinkedList([]), "Array is not a LinkedList");
+      assert(!LinkedList.isLinkedList({}), "Empty Object is not a LinkedList");
+
+      assert(LinkedList.isLinkedList(new LinkedList(0)), "LinkedList is a LinkedList");
+    })
+  });
 });

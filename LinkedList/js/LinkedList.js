@@ -17,7 +17,7 @@ LinkedList.isLinkedList = function isLinkedList(ll) {
   if (ll == null) { return false; }
   if (typeof ll != "object") { return false; }
 
-  return ll.constructor.name === "LinkedListNode";
+  return ll.constructor.name === "LinkedList";
 };
 
 module.exports = LinkedList;
