@@ -96,5 +96,16 @@ describe("LinkedList", function() {
       assert.deepEqual(ll.first, ll.last.previous.previous);
       assert.deepEqual(ll.last, ll.first.next.next);
     });
-  });  
+  });
+
+  describe("LinkedListNode.prototype.clear", function() {
+    it("should mutate the list and clear it", function() {
+      let ll = new LinkedList(0, 1, 2);
+      ll.clear();
+
+      assert.strictEqual(ll.first, null);
+      assert.strictEqual(ll.last, null);
+      assert.strictEqual(ll.count, 0);
+    });
+  });
 });
