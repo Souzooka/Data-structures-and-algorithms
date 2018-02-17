@@ -24,3 +24,4 @@ module.exports = LinkedList;
 
 LinkedList.prototype.addLast = require("./addLast");
 LinkedList.prototype.clear = require("./clear");
+LinkedList.prototype.copyTo = require("./copyTo");

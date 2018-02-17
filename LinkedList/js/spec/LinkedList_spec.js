@@ -98,7 +98,7 @@ describe("LinkedList", function() {
     });
   });
 
-  describe("LinkedListNode.prototype.clear", function() {
+  describe("LinkedList.prototype.clear", function() {
     it("should mutate the list and clear it", function() {
       let ll = new LinkedList(0, 1, 2);
       ll.clear();
@@ -106,6 +106,27 @@ describe("LinkedList", function() {
       assert.strictEqual(ll.first, null);
       assert.strictEqual(ll.last, null);
       assert.strictEqual(ll.count, 0);
+    });
+  });
+
+  describe("LinkedList.prototype.copyTo", function() {
+    it("should copy the values of a linked list to an array", function() {
+      let arr = [];
+      let ll = new LinkedList(1, 2, 3);
+      let copied = ll.copyTo(arr);
+
+      assert.equal(copied, arr);
+      assert.deepEqual(copied, [1, 2, 3]);
+    });
+    it("should also accept a second argument for index to insert values at", function() {
+      let arr = [-999];
+      let ll = new LinkedList(1, 2, 3);
+      assert.deepEqual(ll.copyTo(arr, 1), [-999, 1, 2, 3]);
+    });
+    it("should throw errors for invalid inputs", function() {
+      assert.throws(() => new LinkedList(1).copyTo(null), TypeError);
+      assert.throws(() => new LinkedList(1).copyTo([], null), TypeError);
+      assert.throws(() => new LinkedList(1).copyTo([], -1), RangeError);
     });
   });
 });
