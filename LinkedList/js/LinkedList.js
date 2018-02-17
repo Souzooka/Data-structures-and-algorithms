@@ -25,4 +25,5 @@ module.exports = LinkedList;
 LinkedList.prototype[Symbol.iterator] = require("./Symbol.iterator");
 LinkedList.prototype.addLast = require("./addLast");
 LinkedList.prototype.clear = require("./clear");
+LinkedList.prototype.contains = require("./contains");
 LinkedList.prototype.copyTo = require("./copyTo");

@@ -120,6 +120,21 @@ describe("LinkedList", function() {
     });
   });
 
+  describe("LinkedList.prototype.contains", function() {
+    it("should return a boolean indicating if linked list contains value", function() {
+      let ll = new LinkedList("hello", null, undefined, 1, -2, Symbol.iterator);
+      assert(ll.contains("hello"));
+      assert(ll.contains(null));
+      assert(ll.contains(undefined));
+      assert(ll.contains(1));
+      assert(ll.contains(-2));
+      assert(ll.contains(Symbol.iterator));
+
+      assert(!ll.contains("world"));
+      assert(!ll.contains(5));
+    });
+  });
+
   describe("LinkedList.prototype.copyTo", function() {
     it("should copy the values of a linked list to an array", function() {
       let arr = [];
