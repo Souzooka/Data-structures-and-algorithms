@@ -28,3 +28,4 @@ LinkedList.prototype.clear = require("./clear");
 LinkedList.prototype.contains = require("./contains");
 LinkedList.prototype.copyTo = require("./copyTo");
 LinkedList.prototype.find = require("./find");
+LinkedList.prototype.findLast = require("./findLast");

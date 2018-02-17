@@ -170,4 +170,19 @@ describe("LinkedList", function() {
       assert.strictEqual(found, null);
     });
   });
+
+  describe("LinkedList.prototype.findLast", function() {
+    it("should find and return the last node with given value", function() {
+      let ll = new LinkedList(1, 2, 3, 2, 5);
+      let found = ll.findLast(2);
+      assert.strictEqual(found.value, 2);
+      assert.strictEqual(found.previous.value, 3);
+      assert.strictEqual(found.next.value, 5);
+    });
+    it("should return null if node with value is not found", function() {
+      let ll = new LinkedList(1, 2, 3, 2, 5);
+      let found = ll.findLast(6);
+      assert.strictEqual(found, null);
+    });
+  });
 });
