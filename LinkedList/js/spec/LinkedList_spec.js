@@ -68,6 +68,17 @@ describe("LinkedList", function() {
     });
   });
 
+  describe("LinkedList.prototype[Symbol.iterator]", function() {
+    it("should return iterator/generator for linked list", function() {
+      let ll = new LinkedList(0, 1, 2, 3, 4, 5);
+      let i = 0;
+
+      for (let value of ll) {
+        assert.strictEqual(value, i++);
+      }
+    });
+  });
+
   describe("LinkedList.prototype.addLast", function() {
     it("should append a node or value onto the end of a list", function() {
       let ll = new LinkedList();
