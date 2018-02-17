@@ -155,4 +155,19 @@ describe("LinkedList", function() {
       assert.throws(() => new LinkedList(1).copyTo([], -1), RangeError);
     });
   });
+
+  describe("LinkedList.prototype.find", function() {
+    it("should find and return the first node with given value", function() {
+      let ll = new LinkedList(1, 2, 3, 2, 5);
+      let found = ll.find(2);
+      assert.strictEqual(found.value, 2);
+      assert.strictEqual(found.previous.value, 1);
+      assert.strictEqual(found.next.value, 3);
+    });
+    it("should return null if node with value is not found", function() {
+      let ll = new LinkedList(1, 2, 3, 2, 5);
+      let found = ll.find(6);
+      assert.strictEqual(found, null);
+    });
+  });
 });
