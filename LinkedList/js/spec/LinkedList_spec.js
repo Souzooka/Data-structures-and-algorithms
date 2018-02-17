@@ -65,6 +65,36 @@ describe("LinkedList", function() {
       assert(!LinkedList.isLinkedList({}), "Empty Object is not a LinkedList");
 
       assert(LinkedList.isLinkedList(new LinkedList(0)), "LinkedList is a LinkedList");
-    })
+    });
   });
+
+  describe("LinkedList.prototype.addLast", function() {
+    it("should append a node or value onto the end of a list", function() {
+      let ll = new LinkedList();
+      ll.addLast(new LinkedListNode(0));
+
+      assert.strictEqual(ll.first.value, 0);
+      assert.strictEqual(ll.last.value, 0);
+      assert.strictEqual(ll.count, 1);
+      assert.deepEqual(ll.first.list, ll);
+
+      ll.addLast(1);
+
+      assert.strictEqual(ll.first.value, 0);
+      assert.strictEqual(ll.last.value, 1);
+      assert.strictEqual(ll.count, 2);
+      assert.equal(ll.first, ll.last.previous);
+      assert.equal(ll.last, ll.first.next);
+
+      ll.addLast(2);
+
+      assert.strictEqual(ll.first.value, 0);
+      assert.strictEqual(ll.last.value, 2);
+      assert.strictEqual(ll.first.next.value, 1);
+      assert.strictEqual(ll.last.previous.value, 1);
+      assert.strictEqual(ll.count, 3);
+      assert.deepEqual(ll.first, ll.last.previous.previous);
+      assert.deepEqual(ll.last, ll.first.next.next);
+    });
+  });  
 });
