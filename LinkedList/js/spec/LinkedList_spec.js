@@ -79,6 +79,36 @@ describe("LinkedList", function() {
     });
   });
 
+  describe("LinkedList.prototype.addFirst", function() {
+    it("should prepend a node or value onto the beginning of a list", function() {
+      let ll = new LinkedList();
+      ll.addFirst(new LinkedListNode(0));
+
+      assert.strictEqual(ll.first.value, 0);
+      assert.strictEqual(ll.last.value, 0);
+      assert.strictEqual(ll.count, 1);
+      assert.deepEqual(ll.first.list, ll);
+
+      ll.addFirst(1);
+
+      assert.strictEqual(ll.first.value, 1);
+      assert.strictEqual(ll.last.value, 0, "list.last's value should be 0 after prepending 1");
+      assert.strictEqual(ll.count, 2);
+      assert.equal(ll.first, ll.last.previous);
+      assert.equal(ll.last, ll.first.next);
+
+      ll.addFirst(2);
+
+      assert.strictEqual(ll.first.value, 2);
+      assert.strictEqual(ll.last.value, 0);
+      assert.strictEqual(ll.first.next.value, 1);
+      assert.strictEqual(ll.last.previous.value, 1);
+      assert.strictEqual(ll.count, 3);
+      assert.deepEqual(ll.first, ll.last.previous.previous);
+      assert.deepEqual(ll.last, ll.first.next.next);
+    });
+  });
+
   describe("LinkedList.prototype.addLast", function() {
     it("should append a node or value onto the end of a list", function() {
       let ll = new LinkedList();

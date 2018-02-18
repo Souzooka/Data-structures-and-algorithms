@@ -1,11 +1,11 @@
 const LinkedListNode = require("./LinkedListNode");
 
-module.exports = function addLast(node) {
+module.exports = function addFirst(node) {
   node = LinkedListNode.isLinkedListNode(node) ?
     node :
     new LinkedListNode(node);
 
-    node.list = this;
+  node.list = this;
   ++this.count;
   if (this.first === null) {
     this.first = node;
@@ -13,8 +13,8 @@ module.exports = function addLast(node) {
     return;
   }
 
-  this.last.next = node;
-  node.previous = this.last;
-  this.last = node;
+  this.first.previous = node;
+  node.next = this.first;
+  this.first = node;
   return;
 };
