@@ -215,4 +215,41 @@ describe("LinkedList", function() {
       assert.strictEqual(found, null);
     });
   });
+
+  describe("LinkedList.prototype.removeFirst", function() {
+    it("should not affect a list with no nodes", function() {
+      let ll;
+      ll = new LinkedList();
+      ll.removeFirst();
+
+      assert.strictEqual(ll.first, null);
+      assert.strictEqual(ll.last, null);
+      assert.strictEqual(ll.count, 0);
+    });
+    it("should remove the only node in a one-node list", function() {
+      let ll;
+      ll = new LinkedList(0);
+      ll.removeFirst();
+
+      assert.strictEqual(ll.first, null);
+      assert.strictEqual(ll.last, null);
+      assert.strictEqual(ll.count, 0);
+    });
+    it("should remove the first node in a 2+ node list", function() {
+      let ll;
+      ll = new LinkedList(0, 1);
+      ll.removeFirst();
+
+      assert.strictEqual(ll.first.value, 1);
+      assert.strictEqual(ll.last.value, 1);
+      assert.strictEqual(ll.count, 1);
+
+      ll = new LinkedList(0, 1, 2);
+      ll.removeFirst();
+
+      assert.strictEqual(ll.first.value, 1);
+      assert.strictEqual(ll.last.value, 2);
+      assert.strictEqual(ll.count, 2);
+    });
+  });
 });
