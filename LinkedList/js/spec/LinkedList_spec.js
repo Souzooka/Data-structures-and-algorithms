@@ -79,6 +79,16 @@ describe("LinkedList", function() {
     });
   });
 
+  describe("LinkedList.prototype.addBefore", function() {
+    it("should insert a node before another node in linked list", function() {
+      let ll = new LinkedList(3);
+      ll.addBefore(ll.last, 2);
+      assert.deepEqual(ll, new LinkedList(2, 3));
+      ll.addBefore(ll.last, 1);
+      assert.deepEqual(ll, new LinkedList(2, 1, 3));
+    });
+  })
+
   describe("LinkedList.prototype.addFirst", function() {
     it("should prepend a node or value onto the beginning of a list", function() {
       let ll = new LinkedList();
