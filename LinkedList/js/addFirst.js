@@ -10,11 +10,9 @@ module.exports = function addFirst(node) {
   if (this.first === null) {
     this.first = node;
     this.last = node;
-    return;
+  } else {
+    this.first.previous = node;
+    node.next = this.first;
+    this.first = node;
   }
-
-  this.first.previous = node;
-  node.next = this.first;
-  this.first = node;
-  return;
 };

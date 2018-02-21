@@ -5,16 +5,14 @@ module.exports = function addLast(node) {
     node :
     new LinkedListNode(node);
 
-    node.list = this;
+  node.list = this;
   ++this.count;
   if (this.first === null) {
     this.first = node;
     this.last = node;
-    return;
+  } else {
+    this.last.next = node;
+    node.previous = this.last;
+    this.last = node;
   }
-
-  this.last.next = node;
-  node.previous = this.last;
-  this.last = node;
-  return;
 };
