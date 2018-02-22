@@ -2,20 +2,19 @@ const LinkedListNode = require("./LinkedListNode");
 
 module.exports = function addAfter(node, toAdd) {
   if (!LinkedListNode.isLinkedListNode(node)) {
-    node = this.find(node);
-
-    if (node === null) {
-      throw new Error("Error: LinkedList#addAfter: Value was not in LinkedList");
-    }
+    throw new TypeError("First argument to addAfter must be a LinkedListNode");
   }
-
   if (node.list !== this) {
-    throw new Error("Error: LinkedList#addAfter: Node was not in LinkedList");
+    throw new Error("LinkedList#addAfter: Node was not in LinkedList");
   }
 
   toAdd = LinkedListNode.isLinkedListNode(toAdd) ?
     toAdd :
     new LinkedListNode(toAdd);
+
+  if (toAdd.list !== null) {
+    throw new Error("Second argument to addAfter already belongs to a list");
+  }
 
   if (this.last === node) { this.last = toAdd; }
   if (node.next !== null) { node.next.previous = toAdd; }

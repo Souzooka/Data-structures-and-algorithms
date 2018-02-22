@@ -120,24 +120,16 @@ describe("LinkedList", function() {
       ll.addAfter(ll.first, new LinkedListNode(1));
       assert.deepEqual(ll, new LinkedList(3, 1, 2));
     });
-    it("should insert a value or node after a value in linked list", function() {
-      let ll = new LinkedList(3);
-      ll.addAfter(3, 2);
-      assert.deepEqual(ll, new LinkedList(3, 2));
-      ll.addAfter(3, 1);
-      assert.deepEqual(ll, new LinkedList(3, 1, 2));
-
-      ll = new LinkedList(3);
-      ll.addAfter(3, new LinkedListNode(2));
-      assert.deepEqual(ll, new LinkedList(3, 2));
-      ll.addAfter(3, new LinkedListNode(1));
-      assert.deepEqual(ll, new LinkedList(3, 1, 2));
-    });
     it("should throw an Error if value or node is not in LinkedList", function() {
       let ll = new LinkedList(3);
       let otherll = new LinkedList(3);
       assert.throws(() => ll.addAfter(otherll.first, 2), Error);
       assert.throws(() => ll.addAfter(4, 2), Error);
+    });
+    it("should throw an Error if the node to add already belongs to a list", function() {
+      let ll = new LinkedList(1);
+      let otherll = new LinkedList(1);
+      assert.throws(() => ll.addAfter(ll.first, otherll.first));
     });
   });
 
@@ -155,24 +147,16 @@ describe("LinkedList", function() {
       ll.addBefore(ll.last, new LinkedListNode(1));
       assert.deepEqual(ll, new LinkedList(2, 1, 3));
     });
-    it("should insert a value or node before a value in linked list", function() {
-      let ll = new LinkedList(3);
-      ll.addBefore(3, 2);
-      assert.deepEqual(ll, new LinkedList(2, 3));
-      ll.addBefore(3, 1);
-      assert.deepEqual(ll, new LinkedList(2, 1, 3));
-
-      ll = new LinkedList(3);
-      ll.addBefore(3, new LinkedListNode(2));
-      assert.deepEqual(ll, new LinkedList(2, 3));
-      ll.addBefore(3, new LinkedListNode(1));
-      assert.deepEqual(ll, new LinkedList(2, 1, 3));
-    });
     it("should throw an Error if value or node is not in LinkedList", function() {
       let ll = new LinkedList(3);
       let otherll = new LinkedList(3);
       assert.throws(() => ll.addBefore(otherll.first, 2), Error);
       assert.throws(() => ll.addBefore(4, 2), Error);
+    });
+    it("should throw an Error if the node to add already belongs to a list", function() {
+      let ll = new LinkedList(1);
+      let otherll = new LinkedList(1);
+      assert.throws(() => ll.addBefore(ll.first, otherll.first));
     });
   });
 
@@ -204,6 +188,11 @@ describe("LinkedList", function() {
       assert.deepEqual(ll.first, ll.last.previous.previous);
       assert.deepEqual(ll.last, ll.first.next.next);
     });
+    it("should throw an Error if the node to add already belongs to a list", function() {
+      let ll = new LinkedList(1);
+      let otherll = new LinkedList(1);
+      assert.throws(() => ll.addFirst(ll.first, otherll.first));
+    });
   });
 
   describe("LinkedList.prototype.addLast", function() {
@@ -233,6 +222,11 @@ describe("LinkedList", function() {
       assert.strictEqual(ll.count, 3);
       assert.deepEqual(ll.first, ll.last.previous.previous);
       assert.deepEqual(ll.last, ll.first.next.next);
+    });
+    it("should throw an Error if the node to add already belongs to a list", function() {
+      let ll = new LinkedList(1);
+      let otherll = new LinkedList(1);
+      assert.throws(() => ll.addLast(ll.first, otherll.first));
     });
   });
 

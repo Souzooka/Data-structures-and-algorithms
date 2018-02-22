@@ -5,6 +5,10 @@ module.exports = function addLast(node) {
     node :
     new LinkedListNode(node);
 
+  if (node.list !== null) {
+    throw new Error("node already belongs to a list");
+  }
+
   node.list = this;
   ++this.count;
   if (this.first === null) {
