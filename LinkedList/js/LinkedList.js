@@ -33,3 +33,4 @@ LinkedList.prototype.copyTo = require("./copyTo");
 LinkedList.prototype.find = require("./find");
 LinkedList.prototype.findLast = require("./findLast");
 LinkedList.prototype.removeFirst = require("./removeFirst");
+LinkedList.prototype.removeLast = require("./removeLast");
