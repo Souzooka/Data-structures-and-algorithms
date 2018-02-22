@@ -15,6 +15,11 @@ function LinkedListNode(value, next = null, previous = null, list = null) {
   this.next = next;
   this.previous = previous;
   this.list = list;
+
+  Object.defineProperty(this, "value", {configurable: false});
+  Object.defineProperty(this, "next", {configurable: false});
+  Object.defineProperty(this, "previous", {configurable: false});
+  Object.defineProperty(this, "list", {configurable: false});
 }
 
 LinkedListNode.isLinkedListNode = function isLinkedListNode(node) {

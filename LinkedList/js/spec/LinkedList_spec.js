@@ -17,6 +17,21 @@ describe("LinkedListNode", function() {
       assert.throws(() => new LinkedListNode(9, new LinkedListNode(1), new LinkedListNode(2), {}), TypeError);
     });
   });
+
+  describe("property definitions", function() {
+    it("properties should not be deletable", function() {
+      let lln = new LinkedListNode(0);
+      delete lln.value;
+      delete lln.previous;
+      delete lln.next;
+      delete lln.list;
+      assert(lln.hasOwnProperty("value"), "value was deleted");
+      assert(lln.hasOwnProperty("previous"), "previous was deleted");
+      assert(lln.hasOwnProperty("next"), "next was deleted");
+      assert(lln.hasOwnProperty("list"), "list was deleted");
+    });
+  });
+
   describe("LinkedListNode.isLinkedListNode", function() {
     it("should ascertain if object is LinkedListNode", function() {
       assert(!LinkedListNode.isLinkedListNode(null), "null is not a LinkedListNode");
@@ -58,7 +73,7 @@ describe("LinkedList", function() {
     });
   });
 
-  describe("properties", function() {
+  describe("property definitions", function() {
     it("properties should not be deletable", function() {
       let ll = new LinkedList();
       delete ll.count;
