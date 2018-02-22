@@ -58,6 +58,18 @@ describe("LinkedList", function() {
     });
   });
 
+  describe("properties", function() {
+    it("properties should not be deletable", function() {
+      let ll = new LinkedList();
+      delete ll.count;
+      delete ll.first;
+      delete ll.last;
+      assert(ll.hasOwnProperty("count"), "count was deleted");
+      assert(ll.hasOwnProperty("first"), "first was deleted");
+      assert(ll.hasOwnProperty("last"), "last was deleted");
+    });
+  });
+
   describe("LinkedList.isLinkedList", function() {
     it("should ascertain if object is LinkedList", function() {
       assert(!LinkedList.isLinkedList(null), "null is not a LinkedList");
