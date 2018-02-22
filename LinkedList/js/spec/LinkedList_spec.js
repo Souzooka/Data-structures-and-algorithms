@@ -239,6 +239,15 @@ describe("LinkedList", function() {
       assert.strictEqual(ll.last, null);
       assert.strictEqual(ll.count, 0);
     });
+    it("should remove all references to the original list from the nodes contained within", function() {
+      let ll = new LinkedList(0, 1, 2);
+      let nodes = [ll.first, ll.first.next, ll.first.next.next];
+      ll.clear();
+
+      for (let node of nodes) {
+        assert.strictEqual(node.list, null);
+      }
+    });
   });
 
   describe("LinkedList.prototype.contains", function() {
