@@ -79,6 +79,41 @@ describe("LinkedList", function() {
     });
   });
 
+  describe("LinkedList.prototype.addAfter", function() {
+    it("should insert a value or node after another node in linked list", function() {
+      let ll = new LinkedList(3);
+      ll.addAfter(ll.first, 2);
+      assert.deepEqual(ll, new LinkedList(3, 2));
+      ll.addAfter(ll.first, 1);
+      assert.deepEqual(ll, new LinkedList(3, 1, 2));
+
+      ll = new LinkedList(3);
+      ll.addAfter(ll.first, new LinkedListNode(2));
+      assert.deepEqual(ll, new LinkedList(3, 2));
+      ll.addAfter(ll.first, new LinkedListNode(1));
+      assert.deepEqual(ll, new LinkedList(3, 1, 2));
+    });
+    it("should insert a value or node after a value in linked list", function() {
+      let ll = new LinkedList(3);
+      ll.addAfter(3, 2);
+      assert.deepEqual(ll, new LinkedList(3, 2));
+      ll.addAfter(3, 1);
+      assert.deepEqual(ll, new LinkedList(3, 1, 2));
+
+      ll = new LinkedList(3);
+      ll.addAfter(3, new LinkedListNode(2));
+      assert.deepEqual(ll, new LinkedList(3, 2));
+      ll.addAfter(3, new LinkedListNode(1));
+      assert.deepEqual(ll, new LinkedList(3, 1, 2));
+    });
+    it("should throw an Error if value or node is not in LinkedList", function() {
+      let ll = new LinkedList(3);
+      let otherll = new LinkedList(3);
+      assert.throws(() => ll.addAfter(otherll.first, 2), Error);
+      assert.throws(() => ll.addAfter(4, 2), Error);
+    });
+  });
+
   describe("LinkedList.prototype.addBefore", function() {
     it("should insert a value or node before another node in linked list", function() {
       let ll = new LinkedList(3);
@@ -87,7 +122,7 @@ describe("LinkedList", function() {
       ll.addBefore(ll.last, 1);
       assert.deepEqual(ll, new LinkedList(2, 1, 3));
 
-      ll = new LinkedList(new LinkedListNode(3));
+      ll = new LinkedList(3);
       ll.addBefore(ll.last, new LinkedListNode(2));
       assert.deepEqual(ll, new LinkedList(2, 3));
       ll.addBefore(ll.last, new LinkedListNode(1));
@@ -100,7 +135,7 @@ describe("LinkedList", function() {
       ll.addBefore(3, 1);
       assert.deepEqual(ll, new LinkedList(2, 1, 3));
 
-      ll = new LinkedList(new LinkedListNode(3));
+      ll = new LinkedList(3);
       ll.addBefore(3, new LinkedListNode(2));
       assert.deepEqual(ll, new LinkedList(2, 3));
       ll.addBefore(3, new LinkedListNode(1));
@@ -109,10 +144,10 @@ describe("LinkedList", function() {
     it("should throw an Error if value or node is not in LinkedList", function() {
       let ll = new LinkedList(3);
       let otherll = new LinkedList(3);
-      assert.throws(() => ll.addBefore(otherll, 2), Error);
+      assert.throws(() => ll.addBefore(otherll.first, 2), Error);
       assert.throws(() => ll.addBefore(4, 2), Error);
     });
-  })
+  });
 
   describe("LinkedList.prototype.addFirst", function() {
     it("should prepend a node or value onto the beginning of a list", function() {

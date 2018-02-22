@@ -23,6 +23,7 @@ LinkedList.isLinkedList = function isLinkedList(ll) {
 module.exports = LinkedList;
 
 LinkedList.prototype[Symbol.iterator] = require("./Symbol.iterator");
+LinkedList.prototype.addAfter = require("./addAfter");
 LinkedList.prototype.addBefore = require("./addBefore");
 LinkedList.prototype.addFirst = require("./addFirst");
 LinkedList.prototype.addLast = require("./addLast");
