@@ -316,6 +316,27 @@ describe("LinkedList", function() {
     });
   });
 
+  describe("LinkedList.prototype.remove", function() {
+    it("should remove a node from a LinkedList", function() {
+      let ll = new LinkedList(1);
+      ll.remove(ll.first);
+      assert.deepEqual(ll, new LinkedList());
+
+      ll = new LinkedList(1, 2);
+      ll.remove(ll.last);
+      assert.deepEqual(ll, new LinkedList(1));
+
+      ll = new LinkedList(1, 2, 3);
+      ll.remove(ll.first.next);
+      assert.deepEqual(ll, new LinkedList(1, 3));
+    });
+    it("should remove a node with value from a LinkedList", function() {
+      let ll = new LinkedList(1, 2, 3);
+      ll.remove(2);
+      assert.deepEqual(ll, new LinkedList(1, 3));
+    });
+  });
+
   describe("LinkedList.prototype.removeFirst", function() {
     it("should not affect a list with no nodes", function() {
       let ll;

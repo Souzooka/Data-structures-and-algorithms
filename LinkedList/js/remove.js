@@ -1,3 +1,5 @@
+const LinkedListNode = require("./LinkedListNode");
+
 module.exports = function remove(node) {
   node = LinkedListNode.isLinkedListNode(node) ?
     node :
@@ -19,13 +21,8 @@ module.exports = function remove(node) {
     return;
   }
 
-  if (node.previous !== null) {
-    node.previous.next = node.next;
-  }
-
-  if (node.next !== null) {
-    node.next.previous = node.previous;
-  }
+  node.previous.next = node.next;
+  node.next.previous = node.previous;
   node.list = null;
   --this.count;
   return;
