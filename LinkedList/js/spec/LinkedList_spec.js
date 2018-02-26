@@ -335,6 +335,20 @@ describe("LinkedList", function() {
       ll.remove(2);
       assert.deepEqual(ll, new LinkedList(1, 3));
     });
+    it("should remove the reference to the original list from removed node", function() {
+      let ll = new LinkedList(1, 2, 3, 4);
+      let node = ll.first.next;
+      ll.remove(node);
+      assert.strictEqual(node.list, null);
+
+      node = ll.last;
+      ll.remove(node);
+      assert.strictEqual(node.list, null);
+
+      node = ll.first;
+      ll.remove(node);
+      assert.strictEqual(node.list, null);
+    });
   });
 
   describe("LinkedList.prototype.removeFirst", function() {
