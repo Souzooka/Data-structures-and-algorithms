@@ -349,6 +349,16 @@ describe("LinkedList", function() {
       ll.remove(node);
       assert.strictEqual(node.list, null);
     });
+    it("should throw Error if node is not present in list", function() {
+      let ll = new LinkedList(1, 2, 3, 4);
+      let otherll = new LinkedList(1, 2, 3, 4);
+
+      assert.throws(() => ll.remove(otherll.first));
+    });
+    it("should throw Error if value is not present in list", function() {
+      let ll = new LinkedList(1, 2, 3, 4);
+      assert.throws(() => ll.remove(5));
+    });
   });
 
   describe("LinkedList.prototype.removeFirst", function() {
