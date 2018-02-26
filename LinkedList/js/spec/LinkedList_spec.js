@@ -377,6 +377,12 @@ describe("LinkedList", function() {
       ll.removeFirst();
       assert.strictEqual(ll.first.previous, null);
     });
+    it("should remove the reference to the list from the removed node", function() {
+      let ll = new LinkedList(1);
+      let node = ll.first;
+      ll.removeFirst();
+      assert.strictEqual(node.list, null);
+    });
   });
 
   describe("LinkedList.prototype.removeLast", function() {
@@ -418,6 +424,12 @@ describe("LinkedList", function() {
       let ll = new LinkedList(0, 1, 2);
       ll.removeLast();
       assert.strictEqual(ll.last.next, null);
+    });
+    it("should remove the reference to the list from the removed node", function() {
+      let ll = new LinkedList(1);
+      let node = ll.last;
+      ll.removeLast();
+      assert.strictEqual(node.list, null);
     });
   });
 });
