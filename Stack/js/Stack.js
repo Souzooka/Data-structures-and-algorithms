@@ -20,3 +20,4 @@ function Stack(enumerable) {
 module.exports = Stack;
 
 Stack.prototype.clear = require("./clear");
+Stack.prototype.contains = require("./contains");

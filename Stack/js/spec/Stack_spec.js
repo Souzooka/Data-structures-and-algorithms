@@ -56,4 +56,21 @@ describe("Stack", function() {
       assert.deepEqual(stack.__collection__, []);
     });
   });
+
+  describe("Stack.prototype.contains", function() {
+    it("return true if stack contains item", function() {
+      let stack = new Stack([1, 2, 3, 4]);
+      assert(stack.contains(1));
+      assert(stack.contains(2));
+      assert(stack.contains(3));
+      assert(stack.contains(4));
+    });
+    it("return true if stack does not contain item", function() {
+      let stack = new Stack([1, 2, 3, 4]);
+      assert(!stack.contains(5));
+      assert(!stack.contains(6));
+      assert(!stack.contains(7));
+      assert(!stack.contains(8));
+    });
+  });
 });
