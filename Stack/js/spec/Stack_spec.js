@@ -70,19 +70,53 @@ describe("Stack", function() {
   });
 
   describe("Stack.prototype.contains", function() {
-    it("return true if stack contains item", function() {
+    it("should return true if stack contains item", function() {
       let stack = new Stack([1, 2, 3, 4]);
       assert(stack.contains(1));
       assert(stack.contains(2));
       assert(stack.contains(3));
       assert(stack.contains(4));
     });
-    it("return true if stack does not contain item", function() {
+    it("should return true if stack does not contain item", function() {
       let stack = new Stack([1, 2, 3, 4]);
       assert(!stack.contains(5));
       assert(!stack.contains(6));
       assert(!stack.contains(7));
       assert(!stack.contains(8));
+    });
+  });
+
+  describe("Stack.prototype.copyTo", function() {
+    it("should copy the contents of a stack to an array at specified index", function() {
+      let arr = [];
+      let stack = new Stack([1, 2, 3]);
+      stack.copyTo(arr, 0);
+      assert.deepEqual(arr, [3, 2, 1]);
+
+      arr = [1];
+      stack.copyTo(arr, 1);
+      assert.deepEqual(arr, [1, 3, 2, 1]);
+    });
+    it("should throw error if given non-array for first argument", function() {
+      let stack = new Stack([1, 2, 3]);
+      assert.throws(() => stack.copyTo(1, 0));
+      assert.throws(() => stack.copyTo({}, 0));
+      assert.throws(() => stack.copyTo(null, 0));
+      assert.throws(() => stack.copyTo(undefined, 0));
+      assert.throws(() => stack.copyTo("hello", 0));
+    });
+    it("should throw error if given non-number for second argument", function() {
+      let stack = new Stack([1, 2, 3]);
+      assert.throws(() => stack.copyTo([], null));
+      assert.throws(() => stack.copyTo([]));
+      assert.throws(() => stack.copyTo([], undefined));
+      assert.throws(() => stack.copyTo([], {}));
+      assert.throws(() => stack.copyTo([], []));
+    });
+    it("should throw error if given negative number for second argument", function() {
+      let stack = new Stack([1, 2, 3]);
+      assert.throws(() => stack.copyTo([], -1));
+      assert.throws(() => stack.copyTo([], -100));
     });
   });
 });
