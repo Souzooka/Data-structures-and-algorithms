@@ -19,5 +19,6 @@ function Stack(enumerable) {
 
 module.exports = Stack;
 
+Stack.prototype[Symbol.iterator] = require("./Symbol.iterator");
 Stack.prototype.clear = require("./clear");
 Stack.prototype.contains = require("./contains");
