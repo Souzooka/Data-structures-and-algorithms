@@ -47,4 +47,13 @@ describe("Stack", function() {
       assert.deepEqual(stack.__collection__, []);
     });
   });
+
+  describe("Stack.prototype.clear", function() {
+    it("should clear all items from a stack", function() {
+      let stack = new Stack([1, 2, 3, 4]);
+      stack.clear();
+      assert.strictEqual(stack.count, 0);
+      assert.deepEqual(stack.__collection__, []);
+    });
+  });
 });
