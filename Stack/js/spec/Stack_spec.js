@@ -24,4 +24,27 @@ describe("Stack", function() {
       assert.deepEqual(new Stack(NaN), new Stack());
     });
   });
+
+  describe("properties", function() {
+    it("count should not be deletable", function() {
+      let stack = new Stack();
+      delete stack.count;
+      assert.strictEqual(stack.count, 0);
+    });
+    it("count should not be overwritable", function() {
+      let stack = new Stack();
+      stack.count = 2;
+      assert.strictEqual(stack.count, 0);
+    });
+    it("__collection__ should not be deletable", function() {
+      let stack = new Stack();
+      delete stack.__collection__;
+      assert.deepEqual(stack.__collection__, []);
+    });
+    it("__collection__ should not be overwritable", function() {
+      let stack = new Stack();
+      stack.__collection__ = 9;
+      assert.deepEqual(stack.__collection__, []);
+    });
+  });
 });
