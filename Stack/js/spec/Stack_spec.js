@@ -132,4 +132,26 @@ describe("Stack", function() {
       assert.throws(() => stack.peek());
     });
   });
+
+  describe("Stack.prototype.pop", function() {
+    it("should return the item at top of stack and remove it from stack", function() {
+      let stack = new Stack([1, 2, 3]);
+      assert.strictEqual(stack.pop(), 3);
+      assert.strictEqual(stack.count, 2);
+      assert.deepEqual(stack, new Stack([1, 2]));
+    });
+    it("should throw error if stack is empty", function() {
+      let stack = new Stack();
+      assert.throws(() => stack.pop());
+    });
+  });
+
+  describe("Stack.prototype.push", function() {
+    it("should push item to top of stack", function() {
+      let stack = new Stack([1, 2, 3]);
+      stack.push(4);
+      assert.strictEqual(stack.peek(), 4);
+      assert.strictEqual(stack.count, 4);
+    });
+  });
 });

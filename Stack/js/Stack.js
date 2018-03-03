@@ -24,3 +24,5 @@ Stack.prototype.clear = require("./clear");
 Stack.prototype.contains = require("./contains");
 Stack.prototype.copyTo = require("./copyTo");
 Stack.prototype.peek = require("./peek");
+Stack.prototype.pop = require("./pop");
+Stack.prototype.push = require("./push");
