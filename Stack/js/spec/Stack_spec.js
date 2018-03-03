@@ -119,4 +119,17 @@ describe("Stack", function() {
       assert.throws(() => stack.copyTo([], -100));
     });
   });
+
+  describe("Stack.prototype.peek", function() {
+    it("should return the item at top of stack without modifying stack", function() {
+      let stack = new Stack([1, 2, 3]);
+      assert.strictEqual(stack.peek(), 3);
+      assert.strictEqual(stack.count, 3);
+      assert.deepEqual(stack, new Stack([1, 2, 3]));
+    });
+    it("should throw error if stack is empty", function() {
+      let stack = new Stack();
+      assert.throws(() => stack.peek());
+    });
+  });
 });
