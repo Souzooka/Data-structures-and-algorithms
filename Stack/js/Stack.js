@@ -26,3 +26,4 @@ Stack.prototype.copyTo = require("./copyTo");
 Stack.prototype.peek = require("./peek");
 Stack.prototype.pop = require("./pop");
 Stack.prototype.push = require("./push");
+Stack.prototype.toArray = require("./toArray");

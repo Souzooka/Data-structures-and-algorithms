@@ -154,4 +154,11 @@ describe("Stack", function() {
       assert.strictEqual(stack.count, 4);
     });
   });
+
+  describe("Stack.prototype.toArray", function() {
+    it("should return an array representation of the items in the stack", function() {
+      let stack = new Stack([1, 2, 3]);
+      assert.deepEqual(stack.toArray(), [3, 2, 1]);
+    });
+  });
 });
