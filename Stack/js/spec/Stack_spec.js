@@ -51,11 +51,11 @@ describe("Stack", function() {
   describe("Stack.prototype[Symbol.iterator]", function() {
     it("should iterate over all of the items in stack", function() {
       let stack = new Stack([0, 1, 2, 3]);
-      let i = 0;
+      let i = 3;
 
       for (let item of stack) {
         assert.strictEqual(item, i);
-        ++i;
+        --i;
       }
     });
   });
