@@ -48,4 +48,17 @@ describe("Queue", function() {
       assert.deepEqual(queue.__collection__, new LinkedList());
     });
   });
+
+  describe("Queue.prototype.peek", function() {
+    it("should return the item at top of queue without modifying queue", function() {
+      let queue = new Queue([1, 2, 3]);
+      assert.strictEqual(queue.peek(), 3);
+      assert.strictEqual(queue.count, 3);
+      assert.deepEqual(queue, new Queue([1, 2, 3]));
+    });
+    it("should throw error if queue is empty", function() {
+      let queue = new Queue();
+      assert.throws(() => queue.peek());
+    });
+  });
 });

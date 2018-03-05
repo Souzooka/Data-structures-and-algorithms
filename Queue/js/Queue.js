@@ -19,3 +19,5 @@ function Queue(enumerable) {
 }
 
 module.exports = Queue;
+
+Queue.prototype.peek = require("./peek");
