@@ -49,6 +49,15 @@ describe("Queue", function() {
     });
   });
 
+  describe("Queue.prototype.clear", function() {
+    it("should clear all items from a queue", function() {
+      let queue = new Queue([1, 2, 3, 4]);
+      queue.clear();
+      assert.strictEqual(queue.count, 0);
+      assert.deepEqual(queue.__collection__, new LinkedList());
+    });
+  });
+
   describe("Queue.prototype.peek", function() {
     it("should return the item at top of queue without modifying queue", function() {
       let queue = new Queue([1, 2, 3]);

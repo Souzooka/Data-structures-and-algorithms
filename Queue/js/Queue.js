@@ -20,4 +20,5 @@ function Queue(enumerable) {
 
 module.exports = Queue;
 
+Queue.prototype.clear = require("./clear");
 Queue.prototype.peek = require("./peek");
