@@ -58,6 +58,23 @@ describe("Queue", function() {
     });
   });
 
+  describe("Queue.prototype.contains", function() {
+    it("should return true if queue contains item", function() {
+      let queue = new Queue([1, 2, 3, 4]);
+      assert(queue.contains(1));
+      assert(queue.contains(2));
+      assert(queue.contains(3));
+      assert(queue.contains(4));
+    });
+    it("should return true if queue does not contain item", function() {
+      let queue = new Queue([1, 2, 3, 4]);
+      assert(!queue.contains(5));
+      assert(!queue.contains(6));
+      assert(!queue.contains(7));
+      assert(!queue.contains(8));
+    });
+  });
+
   describe("Queue.prototype.peek", function() {
     it("should return the item at top of queue without modifying queue", function() {
       let queue = new Queue([1, 2, 3]);
