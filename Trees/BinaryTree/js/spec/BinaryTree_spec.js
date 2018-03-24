@@ -11,11 +11,6 @@ describe("BinaryTreeNode", function() {
       assert.strictEqual(node.right, null);
       assert.strictEqual(node.tree, null);
     });
-    it("should throw TypeError if given invalid inputs", function() {
-      assert.throws(() => new BinaryTreeNode(9, {}), TypeError);
-      assert.throws(() => new BinaryTreeNode(9, new BinaryTreeNode(1), {}), TypeError);
-      assert.throws(() => new BinaryTreeNode(9, new BinaryTreeNode(1), new BinaryTreeNode(2), {}), TypeError);
-    });
   });
 
   describe("property definitions", function() {
@@ -50,6 +45,14 @@ describe("BinaryTree", function() {
       bt = new BinaryTree();
       assert.strictEqual(bt.count, 0, "count of empty binary tree should be 0");
       assert.deepEqual(bt.root, null, "root of empty binary tree should be null");
+
+      let btn = new BinaryTreeNode(9);
+      bt = new BinaryTree(btn);
+      assert.strictEqual(bt.count, 1, "count of tree with only root should be 1");
+      assert.deepEqual(bt.root, {value: 9, left: null, right: null, tree: bt});
+    });
+    it("should throw error if constructor is not given null or a BinaryTreeNode", function() {
+      assert.throws(() => new BinaryTree([]));
     });
   });
 
