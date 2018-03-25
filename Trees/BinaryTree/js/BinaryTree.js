@@ -1,23 +1,18 @@
 const BinaryTreeNode = require("./BinaryTreeNode");
 
-function BinaryTree(root = null) {
-  if (!BinaryTreeNode.isBinaryTreeNode(root) && root != null) {
-    throw new TypeError("root must be BinaryTreeNode");
+function BinaryTree(root) {
+  if (!BinaryTreeNode.isBinaryTreeNode(root)) {
+    root = new BinaryTreeNode(root);
   }
 
-  this.count = 0
-  this.root = root;
-
-  if (root != null)
+  if (root.left != null || root.right != null || root.tree != null)
   {
-    if (root.left != null || root.right != null || root.tree != null)
-    {
-      throw new Error("root must not be part of another tree");
-    }
-
-    this.root.tree = this;
-    this.count = 1;
+    throw new Error("root must not be part of another tree");
   }
+
+  this.root = root;
+  this.root.tree = this;
+  this.count = 1;
 
   Object.defineProperty(this, "count", {configurable: false});
   Object.defineProperty(this, "root", {configurable: false});

@@ -34,7 +34,24 @@ describe("BinaryTreeNode", function() {
       assert(!BinaryTreeNode.isBinaryTreeNode({}), "Empty Object is not a BinaryTreeNode");
 
       assert(BinaryTreeNode.isBinaryTreeNode(new BinaryTreeNode(0)), "BinaryTreeNode is a BinaryTreeNode");
-    })
+    });
+  });
+
+  describe("BinaryTreeNode.prototype.AddLeft", function() {
+    it("should add a node to the tree", function() {
+      let bt = new BinaryTree(new BinaryTreeNode(0));
+      bt.root.AddLeft(new BinaryTreeNode(1));
+      assert.deepEqual(bt.root.left, {value: 1, left: null, right: null, tree: bt});
+    });
+    it("should return a reference to the new node", function() {
+      let bt = new BinaryTree(new BinaryTreeNode(0));
+      assert.deepEqual(bt.root.AddLeft(new BinaryTreeNode(1)), {value: 1, left: null, right: null, tree: bt});
+    });
+    it("should make a new node with passed value if not BinaryTreeNode", function() {
+      let bt = new BinaryTree(new BinaryTreeNode(0));
+      bt.root.AddLeft(1);
+      assert.deepEqual(bt.root.left, {value: 1, left: null, right: null, tree: bt});
+    });
   });
 });
 
@@ -43,16 +60,20 @@ describe("BinaryTree", function() {
     it("should initialize a binary tree", function() {
       let bt;
       bt = new BinaryTree();
-      assert.strictEqual(bt.count, 0, "count of empty binary tree should be 0");
-      assert.deepEqual(bt.root, null, "root of empty binary tree should be null");
+      assert.strictEqual(bt.count, 1);
+      assert.deepEqual(bt.root, {value: undefined, left: null, right: null, tree: bt});
 
       let btn = new BinaryTreeNode(9);
       bt = new BinaryTree(btn);
       assert.strictEqual(bt.count, 1, "count of tree with only root should be 1");
       assert.deepEqual(bt.root, {value: 9, left: null, right: null, tree: bt});
     });
-    it("should throw error if constructor is not given null or a BinaryTreeNode", function() {
-      assert.throws(() => new BinaryTree([]));
+    it("should make a new node out of of passed value for root if not BinaryTreeNode", function() {
+      let bt = new BinaryTree([]);
+      assert.deepEqual(bt.root, {value: [], left: null, right: null, tree: bt});
+
+      bt = new BinaryTree();
+      assert.deepEqual(bt.root, {value: undefined, left: null, right: null, tree: bt});
     });
   });
 
