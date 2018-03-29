@@ -20,3 +20,4 @@ BinaryTreeNode.isBinaryTreeNode = function isBinaryTreeNode(node) {
 module.exports = BinaryTreeNode;
 
 BinaryTreeNode.prototype.addLeft = require("./addLeft");
+BinaryTreeNode.prototype.addRight = require("./addRight");

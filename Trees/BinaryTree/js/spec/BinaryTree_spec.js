@@ -57,6 +57,27 @@ describe("BinaryTreeNode", function() {
       assert.strictEqual(bt.root.left.value, 1);
     });
   });
+
+  describe("BinaryTreeNode.prototype.AddLeft", function() {
+    it("should add a node to the tree", function() {
+      let bt = new BinaryTree(new BinaryTreeNode(0));
+      bt.root.addRight(new BinaryTreeNode(1));
+      assert.strictEqual(bt.root.right.value, 1);
+      assert.strictEqual(bt.root.right.left, null);
+      assert.strictEqual(bt.root.right.right, null);
+      assert.deepEqual(bt.root.right.tree, bt);
+    });
+    it("should return a reference to the new node", function() {
+      let bt = new BinaryTree(new BinaryTreeNode(0));
+      let btn = bt.root.addRight(new BinaryTreeNode(1));
+      assert.deepEqual(btn, bt.root.right);
+    });
+    it("should make a new node with passed value if not BinaryTreeNode", function() {
+      let bt = new BinaryTree(new BinaryTreeNode(0));
+      bt.root.addRight(1);
+      assert.strictEqual(bt.root.right.value, 1);
+    });
+  });
 });
 
 describe("BinaryTree", function() {
