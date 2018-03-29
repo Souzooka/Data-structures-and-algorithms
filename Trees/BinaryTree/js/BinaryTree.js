@@ -11,6 +11,7 @@ function BinaryTree(root) {
   }
 
   this.root = root;
+  console.log(this.root)
   this.root.tree = this;
   this.count = 1;
 

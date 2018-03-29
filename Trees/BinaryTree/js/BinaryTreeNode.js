@@ -18,3 +18,5 @@ BinaryTreeNode.isBinaryTreeNode = function isBinaryTreeNode(node) {
 };
 
 module.exports = BinaryTreeNode;
+
+BinaryTreeNode.prototype.addLeft = require("./addLeft");
