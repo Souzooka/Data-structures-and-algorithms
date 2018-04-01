@@ -21,3 +21,5 @@ module.exports = BinaryTreeNode;
 
 BinaryTreeNode.prototype.addLeft = require("./addLeft");
 BinaryTreeNode.prototype.addRight = require("./addRight");
+BinaryTreeNode.prototype.removeLeft = require("./removeLeft");
+BinaryTreeNode.prototype.removeRight = require("./removeRight");
