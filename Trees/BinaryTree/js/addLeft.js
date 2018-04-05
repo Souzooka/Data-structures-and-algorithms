@@ -13,6 +13,7 @@ module.exports = function addLeft(node) {
     throw new Error("node already belongs to tree");
   }
 
+  ++this.tree.count;
   node.tree = this.tree;
   this.left = node;
 

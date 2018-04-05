@@ -1,8 +1,8 @@
 const BinaryTreeNode = require("./BinaryTreeNode");
 
 module.exports = function addRight(node) {
-  if (this.left != null) {
-    throw new Error("There is already a node on the left.")
+  if (this.right != null) {
+    throw new Error("There is already a node on the right.")
   }
 
   if (!BinaryTreeNode.isBinaryTreeNode(node)) {
@@ -13,6 +13,7 @@ module.exports = function addRight(node) {
     throw new Error("node already belongs to tree");
   }
 
+  ++this.tree.count;
   node.tree = this.tree;
   this.right = node;
 

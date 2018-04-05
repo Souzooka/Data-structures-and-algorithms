@@ -2,6 +2,29 @@ const {assert} = require("chai");
 const BinaryTree = require("../BinaryTree");
 const BinaryTreeNode = require("../BinaryTreeNode");
 
+// Generates a perfect tree, for testing purposes
+function generateBinaryTree(depth) {
+  if (typeof depth != "number" || depth < 1) {
+    throw new Error();
+  } 
+
+  let bt = new BinaryTree();
+  let curr = [bt.root];
+  let prev = [];
+
+  for (let i = 1; i < depth; ++i) {
+    prev = curr;
+    curr = [];
+
+    prev.forEach(node => {
+      curr.push(node.addLeft());
+      curr.push(node.addRight());
+    });
+  }
+
+  return bt;
+}
+
 describe("BinaryTreeNode", function() {
   describe("constructor", function() {
     it("should initialize a node", function() {
